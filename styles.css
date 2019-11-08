@@ -1,0 +1,12 @@
+#greeting{
+    /* float: left; */
+}
+
+#decks{
+    /* float: left; */
+}
+
+#cards{
+    width: 50%;
+    float: right;
+}

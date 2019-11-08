@@ -1,5 +1,6 @@
 const header = document.getElementById('greeting')
 const decks = document.getElementById('decks')
+const deck_cards = document.getElementById('cards')
 
 const main = document.getElementById('main')
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,12 +36,12 @@ function userShowPage(user) {
 
 
 function renderCards (card) {
-    main.appendChild(header)
-    const carDiv = document.createElement('div');
+   // main.appendChild(header)
+    // const carDiv = document.createElement('div');
     const image = document.createElement('img');
     image.src = card.imageUrl
-    carDiv.appendChild(image);
-    main.appendChild(carDiv)
+    // carDiv.appendChild(image);
+    deck_cards.appendChild(image)
 }
 
 function fetchDeck() {
