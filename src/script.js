@@ -68,46 +68,46 @@ function playGame(deck){
     let container = document.createElement('div');
     container.setAttribute("class","parent");
 
-    let div1 = document.createElement('div');
-    div1.setAttribute("class","div1");
+    let gameInfo = document.createElement('div');
+    gameInfo.setAttribute("class","div1");
 
-    let div2 = document.createElement('div');
-    div2.setAttribute("class","div2");
+    let oppCard = document.createElement('div');
+    oppCard.setAttribute("class","div2");
     
-    let div3 = document.createElement('div');
-    div3.setAttribute("class","div3");
+    let oppHealth = document.createElement('div');
+    oppHealth.setAttribute("class","div3");
     
-    let div4 = document.createElement('div');
-    div4.setAttribute("class","div4");
+    let oppAttack = document.createElement('div');
+    oppAttack.setAttribute("class","div4");
     
-    let div5 = document.createElement('div');
-    div5.setAttribute("class","div5");
+    let userCard = document.createElement('div');
+    userCard.setAttribute("class","div5");
     
-    let div6 = document.createElement('div');
-    div6.setAttribute("class","div6");
+    let userHealth = document.createElement('div');
+    userHealth.setAttribute("class","div6");
     
-    let div7 = document.createElement('div');
-    div7.setAttribute("class","div7");
+    let userAttack = document.createElement('div');
+    userAttack.setAttribute("class","div7");
     
-    let div8 = document.createElement('div');
-    div8.setAttribute("class","div8");
+    let userHand1 = document.createElement('div');
+    userHand1.setAttribute("class","div8");
     
-    let div9 = document.createElement('div');
-    div9.setAttribute("class","div9");
+    let userHand2 = document.createElement('div');
+    userHand2.setAttribute("class","div9");
     
-    let div10 = document.createElement('div');
-    div10.setAttribute("class","div10");
+    let userHand3 = document.createElement('div');
+    userHand3.setAttribute("class","div10");
     
-    let div11 = document.createElement('div');
-    div11.setAttribute("class","div11");
+    let userHand4 = document.createElement('div');
+    userHand4.setAttribute("class","div11");
     
-    let div12 = document.createElement('div');
-    div12.setAttribute("class","div12");
+    let userHand5 = document.createElement('div');
+    userHand5.setAttribute("class","div12");
     
-    let div13 = document.createElement('div');
-    div13.setAttribute("class","div13");
+    let userHand6 = document.createElement('div');
+    userHand6.setAttribute("class","div13");
 
-    container.append(div1,div2,div3,div4,div5,div6,div7,div8,div9,div10,div11,div12,div13);
+    container.append(gameInfo,oppCard,oppHealth,oppAttack,userCard,userHealth,userAttack,userHand1,userHand2,userHand3,userHand4,userHand5,userHand6);
     
     body.appendChild(container);
     
