@@ -21,7 +21,8 @@
     }
 
     .parent > div{
-        background-color: gray;
+        /* background-color: gray; */
+        border: 1px solid black;
     }
     
     .div1 { grid-area: 2 / 1 / 6 / 3; }
