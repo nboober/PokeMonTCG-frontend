@@ -71,6 +71,20 @@ function playGame(deck){
     let gameInfo = document.createElement('div');
     gameInfo.classList.add("div1");
 
+    let oppPokemonText = document.createElement('p');
+    oppPokemonText.innerText = "Opponent's Pokemon Remaining: "
+    let oppPokemonCount = document.createElement('p');
+    oppPokemonCount.id = "oppPokemonCount";
+    oppPokemonCount.innerText = "6"
+    
+    let userPokemonText = document.createElement('p');
+    userPokemonText.innerText = "\n\n\nUser's Pokemon Remaining: "
+    let userPokemonCount = document.createElement('p');
+    userPokemonCount.id = "userPokemonCount";
+    userPokemonCount.innerText = "6"
+
+    gameInfo.append(oppPokemonText,oppPokemonCount,userPokemonText,userPokemonCount)
+
     let oppCard = document.createElement('div');
     oppCard.classList.add("div2");
     
@@ -255,6 +269,9 @@ function attackOpp(card){
 
     if(oppCardHealth.innerText <= 0){
         let id = card.deck_id;
+        // let oppPokemonCount = document.getElementById("oppPokemonCount").innerText;
+        // let newCount = parseInt(oppPokemonCount) - 1;
+        // oppPokemonCount = newCount;
 
         fetch(`http://localhost:3000/decks/${id}`)
         .then(response => response.json())
