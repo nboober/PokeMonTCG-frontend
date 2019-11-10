@@ -253,7 +253,7 @@ function attackOpp(card){
 
     oppCardHealth.innerText = oppCardHealthValue - userCardAttck;
 
-    if(oppCardHealthValue <= 0){
+    if(oppCardHealth.innerText <= 0){
         let id = card.deck_id;
 
         fetch(`http://localhost:3000/decks/${id}`)
@@ -278,7 +278,7 @@ function oppAttackUser(){
 
     userCardHealth.innerText = userCardHealthValue - oppCardAttck;
 
-    if(userCardHealthValue <= 0){
+    if(userCardHealth.innerText <= 0){
         userCard.innerHTML = "";
         userCardHealth.innerHTML = "";
         userCardAttack.innerHTML = "";
