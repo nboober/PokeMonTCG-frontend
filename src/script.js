@@ -228,6 +228,7 @@ function playEnemyCard(deck){
     let randNumber = Math.floor(Math.random() * 60);
 
     let oppCardContainer = document.querySelector(".div2");
+    oppCardContainer.innerHTML = "";
     let cardImageTag = document.createElement("img"); 
     let cardImage = deck.cards[randNumber].imageUrl;
     let cardId = deck.cards[randNumber].id;
@@ -237,13 +238,50 @@ function playEnemyCard(deck){
 
     let oppCardHealth = document.querySelector('.div3');
     let oppCardAttack = document.querySelector('.div4');
+    oppCardAttack.id = deck.cards[randNumber].attack_damage;
     oppCardHealth.innerText = deck.cards[randNumber].hp;
     oppCardAttack.innerText = `${deck.cards[randNumber].attack_name} - ${deck.cards[randNumber].attack_damage} damage`;
-
 
 }
 
 function attackOpp(card){
-    console.log("attcking");
-    console.log(card);
+    console.log("user attacking");
+    let oppCardHealth = document.querySelector('.div3');
+    let oppCardHealthValue = parseInt(document.querySelector('.div3').innerText);
+
+    let userCardAttck = card.attack_damage;
+
+    oppCardHealth.innerText = oppCardHealthValue - userCardAttck;
+
+    if(oppCardHealthValue <= 0){
+        let id = card.deck_id;
+
+        fetch(`http://localhost:3000/decks/${id}`)
+        .then(response => response.json())
+        .then(deck => {
+            playEnemyCard(deck);
+        })
+
+    }else{
+        oppAttackUser();
+    }
+}
+
+function oppAttackUser(){
+    console.log("opponent attacking");
+    let userCard = document.querySelector('.div5');
+    let userCardHealth = document.querySelector('.div6');
+    let userCardAttack = document.querySelector('.div7');
+    let userCardHealthValue = parseInt(document.querySelector('.div6').innerText);
+
+    let oppCardAttck = parseInt(document.querySelector('.div4').id);
+
+    userCardHealth.innerText = userCardHealthValue - oppCardAttck;
+
+    if(userCardHealthValue <= 0){
+        userCard.innerHTML = "";
+        userCardHealth.innerHTML = "";
+        userCardAttack.innerHTML = "";
+    }
+
 }
