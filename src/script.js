@@ -9,8 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => response.json())
     //.then(cards => cards.forEach(card => renderCard(card)))
     .then(card => userShowPage(card))
-
+    
 })
+var oppRemainingPokemon = 6;
+var userRemainingPokemon = 6;
 
 function userShowPage(user) {
     header.innerText = `Welcome! ${user.name}`
@@ -75,13 +77,13 @@ function playGame(deck){
     oppPokemonText.innerText = "Opponent's Pokemon Remaining: "
     let oppPokemonCount = document.createElement('p');
     oppPokemonCount.id = "oppPokemonCount";
-    oppPokemonCount.innerText = "6"
+    oppPokemonCount.innerText = oppRemainingPokemon;
     
     let userPokemonText = document.createElement('p');
     userPokemonText.innerText = "\n\n\nUser's Pokemon Remaining: "
     let userPokemonCount = document.createElement('p');
     userPokemonCount.id = "userPokemonCount";
-    userPokemonCount.innerText = "6"
+    userPokemonCount.innerText = userRemainingPokemon;
 
     gameInfo.append(oppPokemonText,oppPokemonCount,userPokemonText,userPokemonCount)
 
@@ -269,9 +271,13 @@ function attackOpp(card){
 
     if(oppCardHealth.innerText <= 0){
         let id = card.deck_id;
-        // let oppPokemonCount = document.getElementById("oppPokemonCount").innerText;
-        // let newCount = parseInt(oppPokemonCount) - 1;
-        // oppPokemonCount = newCount;
+        let oppPokemonCount = document.getElementById("oppPokemonCount");
+        let newCount = --oppRemainingPokemon;
+        oppPokemonCount.innerText = newCount;
+
+        if(oppPokemonCount.innerText == 0){
+            win();
+        }
 
         fetch(`http://localhost:3000/decks/${id}`)
         .then(response => response.json())
@@ -299,6 +305,24 @@ function oppAttackUser(){
         userCard.innerHTML = "";
         userCardHealth.innerHTML = "";
         userCardAttack.innerHTML = "";
+
+        let userPokemonCount = document.getElementById("userPokemonCount");
+        let newCount = --userRemainingPokemon;
+        userPokemonCount.innerText = newCount;
+
+        if(userPokemonCount.innerText == 0){
+            lose();
+        }
     }
 
+}
+
+function win(){
+    confirm("You Won!!!")
+    document.location.reload()
+}
+
+function lose(){
+    confirm("You Lose :(")
+    document.location.reload()
 }
