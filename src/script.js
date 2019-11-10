@@ -118,6 +118,8 @@ function playGame(deck){
 function drawCards(deck){
     console.log(deck);
 
+    let userPlayCardContainer = document.querySelector('.div5');
+
     let randNumber1 = Math.floor(Math.random() * 60);
     let randNumber2 = Math.floor(Math.random() * 60);
     let randNumber3 = Math.floor(Math.random() * 60);
@@ -132,8 +134,10 @@ function drawCards(deck){
     cardContainer1.id = cardId1;
     cardContainer1.src = cardImage1;
     hand1.appendChild(cardContainer1);
-    cardContainer1.addEventListener("click", playCard);
-    
+    if(userPlayCardContainer.children.length === 0){
+        cardContainer1.addEventListener("click", playCard);
+    }    
+
     let hand2 = document.querySelector(".div9");
     let cardContainer2 = document.createElement("img"); 
     let cardImage2 = deck.cards[randNumber2].imageUrl;
@@ -141,8 +145,10 @@ function drawCards(deck){
     cardContainer2.id = cardId2;
     cardContainer2.src = cardImage2;
     hand2.appendChild(cardContainer2);
-    cardContainer2.addEventListener("click", playCard);
-    
+    if(userPlayCardContainer.innerHTML == ""){
+        cardContainer2.addEventListener("click", playCard);
+    }
+
     let hand3 = document.querySelector(".div10");
     let cardContainer3 = document.createElement("img"); 
     let cardImage3 = deck.cards[randNumber3].imageUrl;
@@ -150,8 +156,10 @@ function drawCards(deck){
     cardContainer3.id = cardId3;
     cardContainer3.src = cardImage3;
     hand3.appendChild(cardContainer3);
-    cardContainer3.addEventListener("click", playCard);
-    
+    if(userPlayCardContainer.innerHTML == ""){
+        cardContainer3.addEventListener("click", playCard);
+    }
+
     let hand4 = document.querySelector(".div11");
     let cardContainer4 = document.createElement("img"); 
     let cardImage4 = deck.cards[randNumber4].imageUrl;
@@ -159,8 +167,10 @@ function drawCards(deck){
     cardContainer4.id = cardId4;
     cardContainer4.src = cardImage4;
     hand4.appendChild(cardContainer4);
-    cardContainer4.addEventListener("click", playCard);
-    
+    if(userPlayCardContainer.innerHTML == ""){
+        cardContainer4.addEventListener("click", playCard);
+    }
+
     let hand5 = document.querySelector(".div12");
     let cardContainer5 = document.createElement("img"); 
     let cardImage5 = deck.cards[randNumber5].imageUrl;
@@ -168,8 +178,10 @@ function drawCards(deck){
     cardContainer5.id = cardId5;
     cardContainer5.src = cardImage5;
     hand5.appendChild(cardContainer5);
-    cardContainer5.addEventListener("click", playCard);
-    
+    if(userPlayCardContainer.innerHTML == ""){
+        cardContainer5.addEventListener("click", playCard);
+    }
+
     let hand6 = document.querySelector(".div13");
     let cardContainer6 = document.createElement("img"); 
     let cardImage6 = deck.cards[randNumber6].imageUrl;
@@ -178,16 +190,60 @@ function drawCards(deck){
     cardContainer6.src = cardImage6;
     hand6.appendChild(cardContainer6);
     cardContainer6.addEventListener("click", playCard);
-    
+
+    playEnemyCard(deck);
 }
 
 function playCard(){
-    
+
+    event.target.remove();
     let id = event.target.id;
+    
     fetch(`http://localhost:3000/cards/${id}`)
     .then(response => response.json())
     .then(card => {
         console.log(card);
-        debugger
+                
+        let userPlayCardContainer = document.querySelector('.div5');
+        let userPlayCard = document.createElement("img"); 
+        let cardImage1 = card.imageUrl;
+        let cardId1 = card.id;
+        userPlayCard.id = cardId1;
+        userPlayCard.src = cardImage1;
+        userPlayCardContainer.appendChild(userPlayCard);
+        
+        let userCardHealth = document.querySelector('.div6');
+        let userCardAttack = document.querySelector('.div7');
+        
+        userCardHealth.innerText = card.hp;
+        userCardAttack.innerText = `${card.attack_name} - ${card.attack_damage} damage`;
+        userCardAttack.addEventListener("click", function(){
+            attackOpp(card);
+        });
     })
+
+}
+
+function playEnemyCard(deck){
+    let randNumber = Math.floor(Math.random() * 60);
+
+    let oppCardContainer = document.querySelector(".div2");
+    let cardImageTag = document.createElement("img"); 
+    let cardImage = deck.cards[randNumber].imageUrl;
+    let cardId = deck.cards[randNumber].id;
+    cardImageTag.id = cardId;
+    cardImageTag.src = cardImage;
+    oppCardContainer.appendChild(cardImageTag);
+
+    let oppCardHealth = document.querySelector('.div3');
+    let oppCardAttack = document.querySelector('.div4');
+    oppCardHealth.innerText = deck.cards[randNumber].hp;
+    oppCardAttack.innerText = `${deck.cards[randNumber].attack_name} - ${deck.cards[randNumber].attack_damage} damage`;
+
+
+}
+
+function attackOpp(card){
+    console.log("attcking");
+    console.log(card);
 }
