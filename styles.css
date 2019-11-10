@@ -23,6 +23,11 @@
     .parent > div{
         /* background-color: gray; */
         border: 1px solid black;
+        text-align: center;
+    }
+
+    img{
+        width: 160px;
     }
     
     .div1 { grid-area: 2 / 1 / 6 / 3; }

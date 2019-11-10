@@ -5,7 +5,7 @@ const main = document.getElementById('main')
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetch("http://localhost:3000/users/19")
+    fetch("http://localhost:3000/users/1")
     .then(response => response.json())
     //.then(cards => cards.forEach(card => renderCard(card)))
     .then(card => userShowPage(card))
@@ -61,54 +61,133 @@ function fetchDeck() {
 }
 
 function playGame(deck){
-    console.log(deck);
+    // console.log(deck);
     let body = document.querySelector("body");
     body.innerHTML = "";
 
     let container = document.createElement('div');
-    container.setAttribute("class","parent");
+    container.classList.add("parent");
 
     let gameInfo = document.createElement('div');
-    gameInfo.setAttribute("class","div1");
+    gameInfo.classList.add("div1");
 
     let oppCard = document.createElement('div');
-    oppCard.setAttribute("class","div2");
+    oppCard.classList.add("div2");
     
     let oppHealth = document.createElement('div');
-    oppHealth.setAttribute("class","div3");
+    oppHealth.classList.add("div3");
     
     let oppAttack = document.createElement('div');
-    oppAttack.setAttribute("class","div4");
+    oppAttack.classList.add("div4");
     
     let userCard = document.createElement('div');
-    userCard.setAttribute("class","div5");
+    userCard.classList.add("div5");
     
     let userHealth = document.createElement('div');
-    userHealth.setAttribute("class","div6");
+    userHealth.classList.add("div6");
     
     let userAttack = document.createElement('div');
-    userAttack.setAttribute("class","div7");
+    userAttack.classList.add("div7");
     
     let userHand1 = document.createElement('div');
-    userHand1.setAttribute("class","div8");
+    userHand1.classList.add("div8");
     
     let userHand2 = document.createElement('div');
-    userHand2.setAttribute("class","div9");
+    userHand2.classList.add("div9");
     
     let userHand3 = document.createElement('div');
-    userHand3.setAttribute("class","div10");
+    userHand3.classList.add("div10");
     
     let userHand4 = document.createElement('div');
-    userHand4.setAttribute("class","div11");
+    userHand4.classList.add("div11");
     
     let userHand5 = document.createElement('div');
-    userHand5.setAttribute("class","div12");
+    userHand5.classList.add("div12");
     
     let userHand6 = document.createElement('div');
-    userHand6.setAttribute("class","div13");
+    userHand6.classList.add("div13");
 
     container.append(gameInfo,oppCard,oppHealth,oppAttack,userCard,userHealth,userAttack,userHand1,userHand2,userHand3,userHand4,userHand5,userHand6);
     
     body.appendChild(container);
     
+    drawCards(deck);
+
+}
+
+function drawCards(deck){
+    console.log(deck);
+
+    let randNumber1 = Math.floor(Math.random() * 60);
+    let randNumber2 = Math.floor(Math.random() * 60);
+    let randNumber3 = Math.floor(Math.random() * 60);
+    let randNumber4 = Math.floor(Math.random() * 60);
+    let randNumber5 = Math.floor(Math.random() * 60);
+    let randNumber6 = Math.floor(Math.random() * 60);
+
+    let hand1 = document.querySelector(".div8");
+    let cardContainer1 = document.createElement("img"); 
+    let cardImage1 = deck.cards[randNumber1].imageUrl;
+    let cardId1 = deck.cards[randNumber1].id;
+    cardContainer1.id = cardId1;
+    cardContainer1.src = cardImage1;
+    hand1.appendChild(cardContainer1);
+    cardContainer1.addEventListener("click", playCard);
+    
+    let hand2 = document.querySelector(".div9");
+    let cardContainer2 = document.createElement("img"); 
+    let cardImage2 = deck.cards[randNumber2].imageUrl;
+    let cardId2 = deck.cards[randNumber2].id;
+    cardContainer2.id = cardId2;
+    cardContainer2.src = cardImage2;
+    hand2.appendChild(cardContainer2);
+    cardContainer2.addEventListener("click", playCard);
+    
+    let hand3 = document.querySelector(".div10");
+    let cardContainer3 = document.createElement("img"); 
+    let cardImage3 = deck.cards[randNumber3].imageUrl;
+    let cardId3 = deck.cards[randNumber3].id;
+    cardContainer3.id = cardId3;
+    cardContainer3.src = cardImage3;
+    hand3.appendChild(cardContainer3);
+    cardContainer3.addEventListener("click", playCard);
+    
+    let hand4 = document.querySelector(".div11");
+    let cardContainer4 = document.createElement("img"); 
+    let cardImage4 = deck.cards[randNumber4].imageUrl;
+    let cardId4 = deck.cards[randNumber4].id;
+    cardContainer4.id = cardId4;
+    cardContainer4.src = cardImage4;
+    hand4.appendChild(cardContainer4);
+    cardContainer4.addEventListener("click", playCard);
+    
+    let hand5 = document.querySelector(".div12");
+    let cardContainer5 = document.createElement("img"); 
+    let cardImage5 = deck.cards[randNumber5].imageUrl;
+    let cardId5 = deck.cards[randNumber5].id;
+    cardContainer5.id = cardId5;
+    cardContainer5.src = cardImage5;
+    hand5.appendChild(cardContainer5);
+    cardContainer5.addEventListener("click", playCard);
+    
+    let hand6 = document.querySelector(".div13");
+    let cardContainer6 = document.createElement("img"); 
+    let cardImage6 = deck.cards[randNumber6].imageUrl;
+    let cardId6 = deck.cards[randNumber6].id;
+    cardContainer6.id = cardId6;
+    cardContainer6.src = cardImage6;
+    hand6.appendChild(cardContainer6);
+    cardContainer6.addEventListener("click", playCard);
+    
+}
+
+function playCard(){
+    
+    let id = event.target.id;
+    fetch(`http://localhost:3000/cards/${id}`)
+    .then(response => response.json())
+    .then(card => {
+        console.log(card);
+        debugger
+    })
 }
