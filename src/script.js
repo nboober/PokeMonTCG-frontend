@@ -252,7 +252,10 @@ function playCard(){
         let userCardAttack = document.querySelector('.div7');
         userCardAttack.innerHTML = "";
         let attack1 = document.createElement('p');
+        attack1.id = card.attack_damage;
+
         let attack2 = document.createElement('p');
+        attack2.id = card.attack_damage_2;
         
         userCardHealth.innerText = card.hp;
         attack1.innerText = `${card.attack_name} - ${card.attack_damage} damage`;
@@ -264,7 +267,10 @@ function playCard(){
             userCardAttack.append(attack1);
         }
 
-        userCardAttack.addEventListener("click", function(){
+        attack1.addEventListener("click", function(){
+            attackOpp(card);
+        });
+        attack2.addEventListener("click", function(){
             attackOpp(card);
         });
     })
@@ -307,12 +313,13 @@ function playEnemyCard(deck){
 
 function attackOpp(card){
     console.log("user attacking");
+    
+    let attackDamage = parseInt(event.target.id);
+
     let oppCardHealth = document.querySelector('.div3');
     let oppCardHealthValue = parseInt(document.querySelector('.div3').innerText);
 
-    let userCardAttck = card.attack_damage;
-
-    oppCardHealth.innerText = oppCardHealthValue - userCardAttck;
+    oppCardHealth.innerText = oppCardHealthValue - attackDamage;
 
     if(oppCardHealth.innerText <= 0){
         let id = card.deck_id;
