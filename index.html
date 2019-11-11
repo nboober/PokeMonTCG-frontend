@@ -8,10 +8,28 @@
   <body>
     <header>
     </header>
+
+    <!-- Side navigation -->
+<div class="sidenav">
+    <div><img id = "logo" src="https://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG"></div>
+    <a>Decks</a>
+    <ul id='decks'></ul>
+    <a href="#">Gyms<ul id="gyms"></a>
+      <li class="gym rock">Rock</li>
+      <li class="gym water">Water</li>
+      <li class="gym electric">Electric</li>
+      <li class="gym grass">Grass</li>
+      <li class="gym poison">Poison</li>
+      <li class="gym psychic">Psychic</li>
+      <li class="gym fire">Fire</li>
+      <li class="gym ground">Ground</li>
+    </ul>
+    <a href="#">Contact</a>
+  </div>
     
     <main id='main'>
-            <div><h1 id="greeting"></h1></div>
-      <div id='decks'></div>
+            <div><h1 id="greeting" class="greeting"></h1></div>
+            <div><h3 id="current-deck" class="greeting"></h3></div>
     </main>
     <div id='cards'></div>
 
