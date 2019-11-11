@@ -240,6 +240,7 @@ function playCard(){
         console.log(card);
                 
         let userPlayCardContainer = document.querySelector('.div5');
+        userPlayCardContainer.innerHTML = "";
         let userPlayCard = document.createElement("img"); 
         let cardImage1 = card.imageUrl;
         let cardId1 = card.id;
@@ -249,9 +250,20 @@ function playCard(){
         
         let userCardHealth = document.querySelector('.div6');
         let userCardAttack = document.querySelector('.div7');
+        userCardAttack.innerHTML = "";
+        let attack1 = document.createElement('p');
+        let attack2 = document.createElement('p');
         
         userCardHealth.innerText = card.hp;
-        userCardAttack.innerText = `${card.attack_name} - ${card.attack_damage} damage`;
+        attack1.innerText = `${card.attack_name} - ${card.attack_damage} damage`;
+        
+        if(card.attack_name_2 != null){
+            attack2.innerText = `${card.attack_name_2} - ${card.attack_damage_2} damage`;
+            userCardAttack.append(attack1,attack2);
+        }else{
+            userCardAttack.append(attack1);
+        }
+
         userCardAttack.addEventListener("click", function(){
             attackOpp(card);
         });
