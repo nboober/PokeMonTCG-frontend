@@ -1,3 +1,14 @@
+//Gym Badges
+const rockBadge = 'https://cdn.bulbagarden.net/upload/d/dd/Boulder_Badge.png'
+const fireBadge = 'https://cdn.bulbagarden.net/upload/1/12/Volcano_Badge.png'
+const waterBadge = 'https://cdn.bulbagarden.net/upload/9/9c/Cascade_Badge.png'
+const thunderBadge = 'https://cdn.bulbagarden.net/upload/a/a6/Thunder_Badge.png'
+const grassBadge = 'https://cdn.bulbagarden.net/upload/b/b5/Rainbow_Badge.png'
+const psychicBadge = 'https://cdn.bulbagarden.net/upload/6/6b/Marsh_Badge.png'
+const poisonBadge = 'https://cdn.bulbagarden.net/upload/7/7d/Soul_Badge.png'
+const earthBadge = 'https://cdn.bulbagarden.net/upload/7/78/Earth_Badge.png'
+
+//Page elements
 const header = document.getElementById('greeting')
 const decks = document.getElementById('decks')
 const deckCards = document.getElementById('cards')
@@ -5,7 +16,7 @@ const currentDeck = document.getElementById('current-deck')
 const gyms = Array.from(document.getElementsByClassName('gym'))
 const backCardImg = "https://images.pokemontcg.io/xyp/XY154_hires.png"
 const body = document.getElementsByTagName('body')[0]
-
+const sidebar = document.getElementsByClassName('sidenav')[0]
 const main = document.getElementById('main')
 
 
@@ -46,12 +57,11 @@ function userShowPage(user) {
                     playGame(deck)
                 })
             
-                main.appendChild(playButton);
+                sidebar.appendChild(playButton);
             
                 deck.cards.forEach(renderCards)
 
             })
-            //.then(cards => console.log(cards))
         })
         
     })
@@ -71,15 +81,10 @@ function fetchDeck() {
     return fetch(`http://localhost:3000/decks/${deck_id}`)
 }
 
-function renderGymBoard () {
-    body.innerText = ''
-    //create user hand/deck/active card
-    //do the same for computer
-}
 function playGame(deck){
-    // console.log(deck);
-    let body = document.querySelector("body");
     body.innerHTML = "";
+    //myHPBar()
+    //computerHPBar()
 
     let container = document.createElement('div');
     container.classList.add("parent");
@@ -106,6 +111,7 @@ function playGame(deck){
     
     let oppHealth = document.createElement('div');
     oppHealth.classList.add("div3");
+    //computerHPBar(oppHealth)
     
     let oppAttack = document.createElement('div');
     oppAttack.classList.add("div4");
@@ -115,6 +121,7 @@ function playGame(deck){
     
     let userHealth = document.createElement('div');
     userHealth.classList.add("div6");
+   // myHPBar(userHealth)
     
     let userAttack = document.createElement('div');
     userAttack.classList.add("div7");
@@ -244,8 +251,16 @@ function playCard(){
         
         let userCardHealth = document.querySelector('.div6');
         let userCardAttack = document.querySelector('.div7');
+
+        let healthDiv = document.createElement('div');
+        myHPBar(healthDiv)
+        let hp = document.createElement('span');
+        hp.innerText = `${card.hp}/${card.hp}`
+        healthDiv.appendChild(hp)
+
+
         
-        userCardHealth.innerText = card.hp;
+        userCardHealth.appendChild(healthDiv);
         userCardAttack.innerText = `${card.attack_name} - ${card.attack_damage} damage`;
         userCardAttack.addEventListener("click", function(){
             attackOpp(card);
@@ -269,7 +284,7 @@ function playEnemyCard(deck){
     let oppCardHealth = document.querySelector('.div3');
     let oppCardAttack = document.querySelector('.div4');
     oppCardAttack.id = deck.cards[randNumber].attack_damage;
-    oppCardHealth.innerText = deck.cards[randNumber].hp;
+    computerHPBar(oppCardHealth, deck.cards[randNumber])
     oppCardAttack.innerText = `${deck.cards[randNumber].attack_name} - ${deck.cards[randNumber].attack_damage} damage`;
 
 }
@@ -279,9 +294,9 @@ function attackOpp(card){
     let oppCardHealth = document.querySelector('.div3');
     let oppCardHealthValue = parseInt(document.querySelector('.div3').innerText);
 
-    let userCardAttck = card.attack_damage;
+    let userCardAttack = card.attack_damage;
 
-    oppCardHealth.innerText = oppCardHealthValue - userCardAttck;
+    updateCompHP(oppCardHealth, oppCardHealthValue, userCardAttack)
 
     if(oppCardHealth.innerText <= 0){
         let id = card.deck_id;
@@ -310,10 +325,10 @@ function oppAttackUser(){
     let userCardHealth = document.querySelector('.div6');
     let userCardAttack = document.querySelector('.div7');
     let userCardHealthValue = parseInt(document.querySelector('.div6').innerText);
-
-    let oppCardAttck = parseInt(document.querySelector('.div4').id);
-
-    userCardHealth.innerText = userCardHealthValue - oppCardAttck;
+    
+    let oppCardAttack = parseInt(document.querySelector('.div4').id);
+    
+    updateUserHP(userCardHealth, userCardHealthValue, oppCardAttack)
 
     if(userCardHealth.innerText <= 0){
         userCard.innerHTML = "";
@@ -328,7 +343,6 @@ function oppAttackUser(){
             lose();
         }
     }
-
 }
 
 function win(){
@@ -339,4 +353,50 @@ function win(){
 function lose(){
     confirm("You Lose :(")
     document.location.reload()
+}
+
+function myHPBar(healthBox) {
+    const progressBarContainer = document.createElement('div')
+    progressBarContainer.classList.add('progress')
+    const hpBar = document.createElement('div');
+    hpBar.style.width = "100%"
+    hpBar.classList.add('progress-bar');
+    hpBar.classList.add('progress-bar-striped');
+
+    progressBarContainer.appendChild(hpBar)
+    healthBox.appendChild(progressBarContainer)
+}
+
+function computerHPBar(healthBox, card) {
+    const progressBarContainer = document.createElement('div')
+    const hp = document.createElement('span')
+    hp.innerText = `${card.hp}/${card.hp}`
+
+
+
+    progressBarContainer.classList.add('progress')
+    const hpBar = document.createElement('div');
+    hpBar.style.width = "100%"
+
+    hpBar.classList.add('progress-bar');
+    hpBar.classList.add('progress-bar-striped');
+    hpBar.classList.add('bg-danger');
+
+    progressBarContainer.appendChild(hpBar)
+    healthBox.appendChild(progressBarContainer)
+    healthBox.appendChild(hp)
+}
+
+function updateCompHP(healthBox, oppCardHealthValue, userCardAttack) {
+    debugger
+    healthBox.children[0].children[0].style.width = `${oppCardHealthValue - userCardAttack}%`
+}
+
+function updateUserHP(healthBox, userCardHealthValue, oppCardAttack) {
+    debugger
+    healthBox.children[0].children[0].children[0].style.width = `${userCardHealthValue - oppCardAttack}%`
+}
+
+function turnWait() {
+    alert('Next Turn!')
 }
