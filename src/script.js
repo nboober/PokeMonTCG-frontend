@@ -284,11 +284,25 @@ function playEnemyCard(deck){
     oppCardContainer.appendChild(cardImageTag);
 
     let oppCardHealth = document.querySelector('.div3');
-    let oppCardAttack = document.querySelector('.div4');
-    oppCardAttack.id = deck.cards[randNumber].attack_damage;
     oppCardHealth.innerText = deck.cards[randNumber].hp;
-    oppCardAttack.innerText = `${deck.cards[randNumber].attack_name} - ${deck.cards[randNumber].attack_damage} damage`;
 
+    let oppCardAttack = document.querySelector('.div4');
+    oppCardAttack.innerHTML = "";
+
+    let attack1 = document.createElement('p');
+    let attack2 = document.createElement('p');
+    
+    attack1.innerText = `${deck.cards[randNumber].attack_name} - ${deck.cards[randNumber].attack_damage} damage`;
+    attack1.id = deck.cards[randNumber].attack_damage;
+    
+    if(deck.cards[randNumber].attack_name_2 != null){
+        attack2.innerText = `${deck.cards[randNumber].attack_name_2} - ${deck.cards[randNumber].attack_damage_2} damage`;
+        attack2.id = deck.cards[randNumber].attack_damage_2;
+
+        oppCardAttack.append(attack1,attack2);
+    }else{
+        oppCardAttack.append(attack1);
+    }
 }
 
 function attackOpp(card){
