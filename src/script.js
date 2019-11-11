@@ -296,7 +296,10 @@ function playEnemyCard(deck){
     oppCardAttack.innerHTML = "";
 
     let attack1 = document.createElement('p');
+    attack1.classList.add("attack1");
+
     let attack2 = document.createElement('p');
+    attack2.classList.add("attack2");
     
     attack1.innerText = `${deck.cards[randNumber].attack_name} - ${deck.cards[randNumber].attack_damage} damage`;
     attack1.id = deck.cards[randNumber].attack_damage;
@@ -313,7 +316,7 @@ function playEnemyCard(deck){
 
 function attackOpp(card){
     console.log("user attacking");
-    
+
     let attackDamage = parseInt(event.target.id);
 
     let oppCardHealth = document.querySelector('.div3');
@@ -348,10 +351,23 @@ function oppAttackUser(){
     let userCardHealth = document.querySelector('.div6');
     let userCardAttack = document.querySelector('.div7');
     let userCardHealthValue = parseInt(document.querySelector('.div6').innerText);
+    let oppCardAttackContainer = document.querySelector('.div4');
 
-    let oppCardAttck = parseInt(document.querySelector('.div4').id);
+    let oppCardAttack1 = parseInt(oppCardAttackContainer.firstChild.id);
+    let oppCardAttack2 = parseInt(oppCardAttackContainer.lastChild.id);
+    let randomAttack = Math.ceil(Math.random() * 2);
+    debugger
 
-    userCardHealth.innerText = userCardHealthValue - oppCardAttck;
+    let oppCardAttack = 0;
+
+    if(randomAttack == 1){
+        oppCardAttack = oppCardAttack1;
+    }else if(randomAttack == 2){
+        oppCardAttack = oppCardAttack2;
+    }
+
+
+    userCardHealth.innerText = userCardHealthValue - oppCardAttack;
 
     if(userCardHealth.innerText <= 0){
         userCard.innerHTML = "";
