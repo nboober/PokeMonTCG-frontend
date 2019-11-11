@@ -5,6 +5,7 @@ const currentDeck = document.getElementById('current-deck')
 const gyms = Array.from(document.getElementsByClassName('gym'))
 const backCardImg = "https://images.pokemontcg.io/xyp/XY154_hires.png"
 const body = document.getElementsByTagName('body')[0]
+const sidebar = document.getElementsByClassName("sidenav")[0]
 
 const main = document.getElementById('main')
 
@@ -12,7 +13,10 @@ const main = document.getElementById('main')
 document.addEventListener('DOMContentLoaded', () => {
     fetch("http://localhost:3000/users")
     .then(response => response.json())
-    .then(user => userShowPage(user[0]))
+    .then(user => {
+        
+        userShowPage(user[0])
+    })
 
     gyms.forEach(gym => {
     gym.addEventListener('click', () => {
@@ -25,6 +29,7 @@ var oppRemainingPokemon = 6;
 var userRemainingPokemon = 6;
 
 function userShowPage(user) {
+    
     header.innerText = `Welcome! ${user.name}`
     const decksList = document.createElement('ul')
     user.decks.forEach(deck => {
@@ -46,7 +51,7 @@ function userShowPage(user) {
                     playGame(deck)
                 })
             
-                main.appendChild(playButton);
+                sidebar.appendChild(playButton);
             
                 deck.cards.forEach(renderCards)
 
