@@ -7,6 +7,8 @@ const backCardImg = "https://images.pokemontcg.io/xyp/XY154_hires.png"
 const body = document.getElementsByTagName('body')[0]
 
 const main = document.getElementById('main')
+
+
 document.addEventListener('DOMContentLoaded', () => {
     fetch("http://localhost:3000/users")
     .then(response => response.json())
@@ -19,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 })
+var oppRemainingPokemon = 6;
+var userRemainingPokemon = 6;
 
 function userShowPage(user) {
     header.innerText = `Welcome! ${user.name}`
@@ -34,8 +38,22 @@ function userShowPage(user) {
             deckCards.innerText = ""
             fetchDeck()
             .then(response => response.json())
-            .then(deck => deck.cards.forEach(renderCards))
+            .then(deck => {
+
+                let playButton = document.createElement('button');
+                playButton.innerText = "PLAY";
+                playButton.addEventListener('click',function(){
+                    playGame(deck)
+                })
+            
+                main.appendChild(playButton);
+            
+                deck.cards.forEach(renderCards)
+
+            })
+            //.then(cards => console.log(cards))
         })
+        
     })
 }
 
@@ -57,4 +75,268 @@ function renderGymBoard () {
     body.innerText = ''
     //create user hand/deck/active card
     //do the same for computer
+}
+function playGame(deck){
+    // console.log(deck);
+    let body = document.querySelector("body");
+    body.innerHTML = "";
+
+    let container = document.createElement('div');
+    container.classList.add("parent");
+
+    let gameInfo = document.createElement('div');
+    gameInfo.classList.add("div1");
+
+    let oppPokemonText = document.createElement('p');
+    oppPokemonText.innerText = "Opponent's Pokemon Remaining: "
+    let oppPokemonCount = document.createElement('p');
+    oppPokemonCount.id = "oppPokemonCount";
+    oppPokemonCount.innerText = oppRemainingPokemon;
+    
+    let userPokemonText = document.createElement('p');
+    userPokemonText.innerText = "\n\n\nUser's Pokemon Remaining: "
+    let userPokemonCount = document.createElement('p');
+    userPokemonCount.id = "userPokemonCount";
+    userPokemonCount.innerText = userRemainingPokemon;
+
+    gameInfo.append(oppPokemonText,oppPokemonCount,userPokemonText,userPokemonCount)
+
+    let oppCard = document.createElement('div');
+    oppCard.classList.add("div2");
+    
+    let oppHealth = document.createElement('div');
+    oppHealth.classList.add("div3");
+    
+    let oppAttack = document.createElement('div');
+    oppAttack.classList.add("div4");
+    
+    let userCard = document.createElement('div');
+    userCard.classList.add("div5");
+    
+    let userHealth = document.createElement('div');
+    userHealth.classList.add("div6");
+    
+    let userAttack = document.createElement('div');
+    userAttack.classList.add("div7");
+    
+    let userHand1 = document.createElement('div');
+    userHand1.classList.add("div8");
+    
+    let userHand2 = document.createElement('div');
+    userHand2.classList.add("div9");
+    
+    let userHand3 = document.createElement('div');
+    userHand3.classList.add("div10");
+    
+    let userHand4 = document.createElement('div');
+    userHand4.classList.add("div11");
+    
+    let userHand5 = document.createElement('div');
+    userHand5.classList.add("div12");
+    
+    let userHand6 = document.createElement('div');
+    userHand6.classList.add("div13");
+
+    container.append(gameInfo,oppCard,oppHealth,oppAttack,userCard,userHealth,userAttack,userHand1,userHand2,userHand3,userHand4,userHand5,userHand6);
+    
+    body.appendChild(container);
+    
+    drawCards(deck);
+
+}
+
+function drawCards(deck){
+    console.log(deck);
+
+    let userPlayCardContainer = document.querySelector('.div5');
+
+    let randNumber1 = Math.floor(Math.random() * 60);
+    let randNumber2 = Math.floor(Math.random() * 60);
+    let randNumber3 = Math.floor(Math.random() * 60);
+    let randNumber4 = Math.floor(Math.random() * 60);
+    let randNumber5 = Math.floor(Math.random() * 60);
+    let randNumber6 = Math.floor(Math.random() * 60);
+
+    let hand1 = document.querySelector(".div8");
+    let cardContainer1 = document.createElement("img"); 
+    let cardImage1 = deck.cards[randNumber1].imageUrl;
+    let cardId1 = deck.cards[randNumber1].id;
+    cardContainer1.id = cardId1;
+    cardContainer1.src = cardImage1;
+    hand1.appendChild(cardContainer1);
+    if(userPlayCardContainer.children.length === 0){
+        cardContainer1.addEventListener("click", playCard);
+    }    
+
+    let hand2 = document.querySelector(".div9");
+    let cardContainer2 = document.createElement("img"); 
+    let cardImage2 = deck.cards[randNumber2].imageUrl;
+    let cardId2 = deck.cards[randNumber2].id;
+    cardContainer2.id = cardId2;
+    cardContainer2.src = cardImage2;
+    hand2.appendChild(cardContainer2);
+    if(userPlayCardContainer.innerHTML == ""){
+        cardContainer2.addEventListener("click", playCard);
+    }
+
+    let hand3 = document.querySelector(".div10");
+    let cardContainer3 = document.createElement("img"); 
+    let cardImage3 = deck.cards[randNumber3].imageUrl;
+    let cardId3 = deck.cards[randNumber3].id;
+    cardContainer3.id = cardId3;
+    cardContainer3.src = cardImage3;
+    hand3.appendChild(cardContainer3);
+    if(userPlayCardContainer.innerHTML == ""){
+        cardContainer3.addEventListener("click", playCard);
+    }
+
+    let hand4 = document.querySelector(".div11");
+    let cardContainer4 = document.createElement("img"); 
+    let cardImage4 = deck.cards[randNumber4].imageUrl;
+    let cardId4 = deck.cards[randNumber4].id;
+    cardContainer4.id = cardId4;
+    cardContainer4.src = cardImage4;
+    hand4.appendChild(cardContainer4);
+    if(userPlayCardContainer.innerHTML == ""){
+        cardContainer4.addEventListener("click", playCard);
+    }
+
+    let hand5 = document.querySelector(".div12");
+    let cardContainer5 = document.createElement("img"); 
+    let cardImage5 = deck.cards[randNumber5].imageUrl;
+    let cardId5 = deck.cards[randNumber5].id;
+    cardContainer5.id = cardId5;
+    cardContainer5.src = cardImage5;
+    hand5.appendChild(cardContainer5);
+    if(userPlayCardContainer.innerHTML == ""){
+        cardContainer5.addEventListener("click", playCard);
+    }
+
+    let hand6 = document.querySelector(".div13");
+    let cardContainer6 = document.createElement("img"); 
+    let cardImage6 = deck.cards[randNumber6].imageUrl;
+    let cardId6 = deck.cards[randNumber6].id;
+    cardContainer6.id = cardId6;
+    cardContainer6.src = cardImage6;
+    hand6.appendChild(cardContainer6);
+    cardContainer6.addEventListener("click", playCard);
+
+    playEnemyCard(deck);
+}
+
+function playCard(){
+
+    event.target.remove();
+    let id = event.target.id;
+    
+    fetch(`http://localhost:3000/cards/${id}`)
+    .then(response => response.json())
+    .then(card => {
+        console.log(card);
+                
+        let userPlayCardContainer = document.querySelector('.div5');
+        let userPlayCard = document.createElement("img"); 
+        let cardImage1 = card.imageUrl;
+        let cardId1 = card.id;
+        userPlayCard.id = cardId1;
+        userPlayCard.src = cardImage1;
+        userPlayCardContainer.appendChild(userPlayCard);
+        
+        let userCardHealth = document.querySelector('.div6');
+        let userCardAttack = document.querySelector('.div7');
+        
+        userCardHealth.innerText = card.hp;
+        userCardAttack.innerText = `${card.attack_name} - ${card.attack_damage} damage`;
+        userCardAttack.addEventListener("click", function(){
+            attackOpp(card);
+        });
+    })
+
+}
+
+function playEnemyCard(deck){
+    let randNumber = Math.floor(Math.random() * 60);
+
+    let oppCardContainer = document.querySelector(".div2");
+    oppCardContainer.innerHTML = "";
+    let cardImageTag = document.createElement("img"); 
+    let cardImage = deck.cards[randNumber].imageUrl;
+    let cardId = deck.cards[randNumber].id;
+    cardImageTag.id = cardId;
+    cardImageTag.src = cardImage;
+    oppCardContainer.appendChild(cardImageTag);
+
+    let oppCardHealth = document.querySelector('.div3');
+    let oppCardAttack = document.querySelector('.div4');
+    oppCardAttack.id = deck.cards[randNumber].attack_damage;
+    oppCardHealth.innerText = deck.cards[randNumber].hp;
+    oppCardAttack.innerText = `${deck.cards[randNumber].attack_name} - ${deck.cards[randNumber].attack_damage} damage`;
+
+}
+
+function attackOpp(card){
+    console.log("user attacking");
+    let oppCardHealth = document.querySelector('.div3');
+    let oppCardHealthValue = parseInt(document.querySelector('.div3').innerText);
+
+    let userCardAttck = card.attack_damage;
+
+    oppCardHealth.innerText = oppCardHealthValue - userCardAttck;
+
+    if(oppCardHealth.innerText <= 0){
+        let id = card.deck_id;
+        let oppPokemonCount = document.getElementById("oppPokemonCount");
+        let newCount = --oppRemainingPokemon;
+        oppPokemonCount.innerText = newCount;
+
+        if(oppPokemonCount.innerText == 0){
+            win();
+        }
+
+        fetch(`http://localhost:3000/decks/${id}`)
+        .then(response => response.json())
+        .then(deck => {
+            playEnemyCard(deck);
+        })
+
+    }else{
+        oppAttackUser();
+    }
+}
+
+function oppAttackUser(){
+    console.log("opponent attacking");
+    let userCard = document.querySelector('.div5');
+    let userCardHealth = document.querySelector('.div6');
+    let userCardAttack = document.querySelector('.div7');
+    let userCardHealthValue = parseInt(document.querySelector('.div6').innerText);
+
+    let oppCardAttck = parseInt(document.querySelector('.div4').id);
+
+    userCardHealth.innerText = userCardHealthValue - oppCardAttck;
+
+    if(userCardHealth.innerText <= 0){
+        userCard.innerHTML = "";
+        userCardHealth.innerHTML = "";
+        userCardAttack.innerHTML = "";
+
+        let userPokemonCount = document.getElementById("userPokemonCount");
+        let newCount = --userRemainingPokemon;
+        userPokemonCount.innerText = newCount;
+
+        if(userPokemonCount.innerText == 0){
+            lose();
+        }
+    }
+
+}
+
+function win(){
+    confirm("You Won!!!")
+    document.location.reload()
+}
+
+function lose(){
+    confirm("You Lose :(")
+    document.location.reload()
 }
