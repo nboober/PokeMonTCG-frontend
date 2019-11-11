@@ -23,7 +23,10 @@ const main = document.getElementById('main')
 document.addEventListener('DOMContentLoaded', () => {
     fetch("http://localhost:3000/users")
     .then(response => response.json())
-    .then(user => userShowPage(user[0]))
+    .then(user => {
+        
+        userShowPage(user[0])
+    })
 
     gyms.forEach(gym => {
     gym.addEventListener('click', () => {
@@ -36,6 +39,7 @@ var oppRemainingPokemon = 6;
 var userRemainingPokemon = 6;
 
 function userShowPage(user) {
+    
     header.innerText = `Welcome! ${user.name}`
     const decksList = document.createElement('ul')
     user.decks.forEach(deck => {
@@ -56,7 +60,10 @@ function userShowPage(user) {
                 playButton.addEventListener('click',function(){
                     playGame(deck)
                 })
-            
+        
+        if(sidebar.lastElementChild.toString() === "[object HTMLButtonElement]"){
+            sidebar.lastElementChild.remove();
+        }
                 sidebar.appendChild(playButton);
             
                 deck.cards.forEach(renderCards)
@@ -242,6 +249,7 @@ function playCard(){
         console.log(card);
                 
         let userPlayCardContainer = document.querySelector('.div5');
+        userPlayCardContainer.innerHTML = "";
         let userPlayCard = document.createElement("img"); 
         let cardImage1 = card.imageUrl;
         let cardId1 = card.id;
@@ -263,6 +271,27 @@ function playCard(){
         userCardHealth.appendChild(healthDiv);
         userCardAttack.innerText = `${card.attack_name} - ${card.attack_damage} damage`;
         userCardAttack.addEventListener("click", function(){
+        userCardAttack.innerHTML = "";
+        let attack1 = document.createElement('p');
+        attack1.id = card.attack_damage;
+
+        let attack2 = document.createElement('p');
+        attack2.id = card.attack_damage_2;
+        
+        userCardHealth.innerText = card.hp;
+        attack1.innerText = `${card.attack_name} - ${card.attack_damage} damage`;
+        
+        if(card.attack_name_2 != null){
+            attack2.innerText = `${card.attack_name_2} - ${card.attack_damage_2} damage`;
+            userCardAttack.append(attack1,attack2);
+        }else{
+            userCardAttack.append(attack1);
+        }
+
+        attack1.addEventListener("click", function(){
+            attackOpp(card);
+        });
+        attack2.addEventListener("click", function(){
             attackOpp(card);
         });
     })
@@ -286,17 +315,42 @@ function playEnemyCard(deck){
     oppCardAttack.id = deck.cards[randNumber].attack_damage;
     computerHPBar(oppCardHealth, deck.cards[randNumber])
     oppCardAttack.innerText = `${deck.cards[randNumber].attack_name} - ${deck.cards[randNumber].attack_damage} damage`;
+    //oppCardHealth.innerText = deck.cards[randNumber].hp;
 
+    let oppCardAttack = document.querySelector('.div4');
+    oppCardAttack.innerHTML = "";
+
+    let attack1 = document.createElement('p');
+    attack1.classList.add("attack1");
+
+    let attack2 = document.createElement('p');
+    attack2.classList.add("attack2");
+    
+    attack1.innerText = `${deck.cards[randNumber].attack_name} - ${deck.cards[randNumber].attack_damage} damage`;
+    attack1.id = deck.cards[randNumber].attack_damage;
+    
+    if(deck.cards[randNumber].attack_name_2 != null){
+        attack2.innerText = `${deck.cards[randNumber].attack_name_2} - ${deck.cards[randNumber].attack_damage_2} damage`;
+        attack2.id = deck.cards[randNumber].attack_damage_2;
+
+        oppCardAttack.append(attack1,attack2);
+    }else{
+        oppCardAttack.append(attack1);
+    }
 }
 
 function attackOpp(card){
     console.log("user attacking");
+
+    let attackDamage = parseInt(event.target.id);
+
     let oppCardHealth = document.querySelector('.div3');
     let oppCardHealthValue = parseInt(document.querySelector('.div3').innerText);
 
     let userCardAttack = card.attack_damage;
 
     updateCompHP(oppCardHealth, oppCardHealthValue, userCardAttack)
+    //oppCardHealth.innerText = oppCardHealthValue - attackDamage;
 
     if(oppCardHealth.innerText <= 0){
         let id = card.deck_id;
@@ -325,10 +379,23 @@ function oppAttackUser(){
     let userCardHealth = document.querySelector('.div6');
     let userCardAttack = document.querySelector('.div7');
     let userCardHealthValue = parseInt(document.querySelector('.div6').innerText);
-    
-    let oppCardAttack = parseInt(document.querySelector('.div4').id);
-    
+    let oppCardAttackContainer = document.querySelector('.div4');
+
+    let oppCardAttack1 = parseInt(oppCardAttackContainer.firstChild.id);
+    let oppCardAttack2 = parseInt(oppCardAttackContainer.lastChild.id);
+    let randomAttack = Math.ceil(Math.random() * 2);
+    debugger
+
+    let oppCardAttack = 0;
+
+    if(randomAttack == 1){
+        oppCardAttack = oppCardAttack1;
+    }else if(randomAttack == 2){
+        oppCardAttack = oppCardAttack2;
+    }
+
     updateUserHP(userCardHealth, userCardHealthValue, oppCardAttack)
+    //userCardHealth.innerText = userCardHealthValue - oppCardAttack;
 
     if(userCardHealth.innerText <= 0){
         userCard.innerHTML = "";
