@@ -50,13 +50,15 @@ function userShowPage(user) {
                 playButton.addEventListener('click',function(){
                     playGame(deck)
                 })
-            
+        
+        if(sidebar.lastElementChild.toString() === "[object HTMLButtonElement]"){
+            sidebar.lastElementChild.remove();
+        }
                 sidebar.appendChild(playButton);
             
                 deck.cards.forEach(renderCards)
 
             })
-            //.then(cards => console.log(cards))
         })
         
     })
@@ -78,8 +80,6 @@ function fetchDeck() {
 
 function renderGymBoard () {
     body.innerText = ''
-    //create user hand/deck/active card
-    //do the same for computer
 }
 function playGame(deck){
     // console.log(deck);
