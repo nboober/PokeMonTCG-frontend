@@ -90,8 +90,6 @@ function fetchDeck() {
 
 function playGame(deck){
     body.innerHTML = "";
-    //myHPBar()
-    //computerHPBar()
 
     let container = document.createElement('div');
     container.classList.add("parent");
@@ -239,7 +237,6 @@ function drawCards(deck){
 }
 
 function playCard(){
-
     event.target.remove();
     let id = event.target.id;
     
@@ -261,7 +258,7 @@ function playCard(){
         let userCardAttack = document.querySelector('.div7');
 
         let healthDiv = document.createElement('div');
-        myHPBar(healthDiv)
+        myHPBar(healthDiv, card)
         let hp = document.createElement('span');
         hp.innerText = `${card.hp}/${card.hp}`
         healthDiv.appendChild(hp)
@@ -270,7 +267,6 @@ function playCard(){
         
         userCardHealth.appendChild(healthDiv);
         userCardAttack.innerText = `${card.attack_name} - ${card.attack_damage} damage`;
-        userCardAttack.addEventListener("click", function(){
         userCardAttack.innerHTML = "";
         let attack1 = document.createElement('p');
         attack1.id = card.attack_damage;
@@ -278,9 +274,7 @@ function playCard(){
         let attack2 = document.createElement('p');
         attack2.id = card.attack_damage_2;
         
-        userCardHealth.innerText = card.hp;
         attack1.innerText = `${card.attack_name} - ${card.attack_damage} damage`;
-        
         if(card.attack_name_2 != null){
             attack2.innerText = `${card.attack_name_2} - ${card.attack_damage_2} damage`;
             userCardAttack.append(attack1,attack2);
@@ -294,14 +288,14 @@ function playCard(){
         attack2.addEventListener("click", function(){
             attackOpp(card);
         });
-    })
 
-}
+})}
 
 function playEnemyCard(deck){
     let randNumber = Math.floor(Math.random() * 60);
 
     let oppCardContainer = document.querySelector(".div2");
+    oppCardContainer.setAttribute('hp', deck.cards[randNumber].hp)
     oppCardContainer.innerHTML = "";
     let cardImageTag = document.createElement("img"); 
     let cardImage = deck.cards[randNumber].imageUrl;
@@ -315,9 +309,7 @@ function playEnemyCard(deck){
     oppCardAttack.id = deck.cards[randNumber].attack_damage;
     computerHPBar(oppCardHealth, deck.cards[randNumber])
     oppCardAttack.innerText = `${deck.cards[randNumber].attack_name} - ${deck.cards[randNumber].attack_damage} damage`;
-    //oppCardHealth.innerText = deck.cards[randNumber].hp;
 
-    let oppCardAttack = document.querySelector('.div4');
     oppCardAttack.innerHTML = "";
 
     let attack1 = document.createElement('p');
@@ -347,14 +339,12 @@ function attackOpp(card){
     let oppCardHealth = document.querySelector('.div3');
     let oppCardHealthValue = parseInt(document.querySelector('.div3').innerText);
 
-    let userCardAttack = card.attack_damage;
-
-    updateCompHP(oppCardHealth, oppCardHealthValue, userCardAttack)
-    //oppCardHealth.innerText = oppCardHealthValue - attackDamage;
-
-    if(oppCardHealth.innerText <= 0){
+    updateCompHP(oppCardHealth, oppCardHealthValue, attackDamage)
+    let currentHealth= Number(oppCardHealth.innerText.split("/")[0])
+    if(currentHealth <= 0){
         let id = card.deck_id;
         let oppPokemonCount = document.getElementById("oppPokemonCount");
+        oppCardHealth.innerHTML = ""
         let newCount = --oppRemainingPokemon;
         oppPokemonCount.innerText = newCount;
 
@@ -384,7 +374,6 @@ function oppAttackUser(){
     let oppCardAttack1 = parseInt(oppCardAttackContainer.firstChild.id);
     let oppCardAttack2 = parseInt(oppCardAttackContainer.lastChild.id);
     let randomAttack = Math.ceil(Math.random() * 2);
-    debugger
 
     let oppCardAttack = 0;
 
@@ -395,9 +384,8 @@ function oppAttackUser(){
     }
 
     updateUserHP(userCardHealth, userCardHealthValue, oppCardAttack)
-    //userCardHealth.innerText = userCardHealthValue - oppCardAttack;
-
-    if(userCardHealth.innerText <= 0){
+    let current_health = Number(userCardHealth.innerText.split("/")[0])
+    if( current_health <= 0){
         userCard.innerHTML = "";
         userCardHealth.innerHTML = "";
         userCardAttack.innerHTML = "";
@@ -455,13 +443,21 @@ function computerHPBar(healthBox, card) {
 }
 
 function updateCompHP(healthBox, oppCardHealthValue, userCardAttack) {
+    let oppHp = healthBox.previousElementSibling.getAttribute("hp")
+    let new_health_value = oppCardHealthValue - userCardAttack
+    let new_percentage = (new_health_value / oppHp) * 100
+    
+    healthBox.children[0].children[0].style.width = `${new_percentage}%`
+    healthBox.getElementsByTagName('span')[0].innerText = `${new_health_value}/${oppHp}`
     debugger
-    healthBox.children[0].children[0].style.width = `${oppCardHealthValue - userCardAttack}%`
 }
 
 function updateUserHP(healthBox, userCardHealthValue, oppCardAttack) {
-    debugger
-    healthBox.children[0].children[0].children[0].style.width = `${userCardHealthValue - oppCardAttack}%`
+    let new_health_value = userCardHealthValue - oppCardAttack
+    let total_health_value = userCardHealthValue
+    let new_percentage = (new_health_value / total_health_value) * 100
+    healthBox.children[0].children[0].children[0].style.width = `${new_percentage}%`
+    healthBox.getElementsByTagName('span')[0].innerText = `${new_health_value}/${total_health_value}`
 }
 
 function turnWait() {
