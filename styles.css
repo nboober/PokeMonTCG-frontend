@@ -24,6 +24,11 @@ body {
   display: none;
 }
 
+#badge-div {
+  /* border: 1px solid white; */
+  float: right;
+  /* position: absolute; */
+}
 
 #greeting{
     /* float: left; */
