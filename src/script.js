@@ -9,6 +9,10 @@ const poisonBadge = 'https://cdn.bulbagarden.net/upload/7/7d/Soul_Badge.png'
 const earthBadge = 'https://cdn.bulbagarden.net/upload/7/78/Earth_Badge.png'
 
 //Page elements
+let currentUser;
+const htmlDoc = document.getElementsByTagName('html')[0]
+const loginDiv = document.getElementById('login-logo-div')
+const loginForm = document.getElementById('login-form')
 const header = document.getElementById('greeting')
 const decks = document.getElementById('decks')
 const deckCards = document.getElementById('cards')
@@ -21,25 +25,34 @@ const main = document.getElementById('main')
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetch("http://localhost:3000/users")
-    .then(response => response.json())
-    .then(user => {
-        
-        userShowPage(user[0])
-    })
+    
+    loginForm.addEventListener('submit', login)
 
-    gyms.forEach(gym => {
-    gym.addEventListener('click', () => {
-        renderGymBoard()
-    })
-})
+//     fetch("http://localhost:3000/users")
+//     .then(response => response.json())
+//     .then(user => {
+        
+//         userShowPage(user[0])
+//     })
+
+//     gyms.forEach(gym => {
+//     gym.addEventListener('click', () => {
+//         renderGymBoard()
+//     })
+// })
 
 })
 var oppRemainingPokemon = 6;
 var userRemainingPokemon = 6;
 
 function userShowPage(user) {
-    
+    body.removeAttribute('style')
+    sidebar.removeAttribute('hidden')
+    htmlDoc.style.display = "inline";
+    body.style.display = "inline";
+    // body.style.backkgroundImage = none;
+    loginDiv.classList.add("login")
+    main.removeAttribute('hidden')
     header.innerText = `Welcome! ${user.name}`
     const decksList = document.createElement('ul')
     user.decks.forEach(deck => {
@@ -460,6 +473,37 @@ function updateUserHP(healthBox, userCardHealthValue, oppCardAttack) {
     healthBox.getElementsByTagName('span')[0].innerText = `${new_health_value}/${total_health_value}`
 }
 
-function turnWait() {
-    alert('Next Turn!')
+// function turnWait() {
+//     alert('Next Turn!')    HAVE YET TO USE THIS
+// }
+
+function login() {
+    event.preventDefault()
+    console.log("helo")
+    const username = document.getElementById('username').value
+    const password = document.getElementById('password').value
+    fetch('http://localhost:3000/users')
+    .then(response => response.json())
+    .then(users => checkUsers(users, username, password))
 }
+
+function checkUsers(users, username, password) {
+    let userFound = false
+    users.forEach(user => {
+        if (user.username === username && user.password === password) {
+            currentUser = user;
+            userFound = true;
+        }
+    })
+    //debugger
+    if (userFound) {
+        console.log("succesful login")
+        userShowPage(currentUser)
+    } else {
+        alert("User Not Found!")
+    }
+}
+
+
+
+

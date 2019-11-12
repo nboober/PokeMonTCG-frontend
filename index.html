@@ -11,7 +11,7 @@
     </header>
 
     <!-- Side navigation -->
-<div class="sidenav">
+<div class="sidenav" hidden>
     <div><img id = "logo" src="https://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG"></div>
     <a>Decks</a>
     <ul id='decks'></ul>
@@ -27,8 +27,16 @@
     </ul>
     <a href="#">Contact</a>
   </div>
+
+  <div id="login-logo-div"><img src="http://pluspng.com/img-png/pokemon-logo-png-file-pokemon-logo-png-500.png" id="login-logo">
+    <form id="login-form">
+        <span>USERNAME: <input type="text" name="username" id="username"></span><br>
+        <span>PASSWORD: <input type="text" name="lastname" id="password"></span><br>
+        <input type="submit" value="Login" id="login-button">
+      </form>
+    </div>
     
-    <main id='main'>
+    <main id='main' hidden>
             <div><h1 id="greeting" class="greeting"></h1></div>
             <div><h3 id="current-deck" class="greeting"></h3></div>
     </main>

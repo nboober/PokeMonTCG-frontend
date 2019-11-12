@@ -1,5 +1,44 @@
+html {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  height: 100%;
+  /* width: 100%; */
+  display: flex;
+  /* border: 1px solid red; WHY CAN'T I FLEX IT IN HERE? */
+  justify-content: center;
+  /* align-items: center; */
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('https://images7.alphacoders.com/592/thumb-1920-592678.jpg');
+  /* background-repeat: no-repeat; */
+  background-size: cover;
+  color: white;
+}
+
+.login {
+  display: none;
+}
+
+
 #greeting{
     /* float: left; */
+}
+
+#login-logo-div {
+  /* border: 1px solid green; */
+  margin-left: 150px;
+  margin-top: 150px;
+}
+
+form {
+  margin-left: 150px;
+}
+
+#login-logo {
+  height: auto;
+  width: auto;
 }
 
 #decks{
