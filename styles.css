@@ -1,6 +1,7 @@
 html {
   height: 100%;
   display: flex;
+  /* border: 1px solid green; */
   justify-content: center;
 }
 
@@ -8,9 +9,11 @@ body {
   height: 100%;
   /* width: 100%; */
   display: flex;
+  /* border: 1px solid red; */
   /* border: 1px solid red; WHY CAN'T I FLEX IT IN HERE? */
-  justify-content: center;
+  /* justify-items;: center; */
   /* align-items: center; */
+  /* border: 1px solid red; */
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('https://images7.alphacoders.com/592/thumb-1920-592678.jpg');
   /* background-repeat: no-repeat; */
   background-size: cover;
@@ -27,13 +30,13 @@ body {
 }
 
 #login-logo-div {
-  /* border: 1px solid green; */
+  /* border: 3px solid purple; */
   margin-left: 150px;
-  margin-top: 150px;
+  margin-top: 125px;
 }
 
 form {
-  margin-left: 150px;
+  margin-left: 125px;
 }
 
 #login-logo {
