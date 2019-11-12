@@ -8,6 +8,19 @@ const psychicBadge = 'https://cdn.bulbagarden.net/upload/6/6b/Marsh_Badge.png'
 const poisonBadge = 'https://cdn.bulbagarden.net/upload/7/7d/Soul_Badge.png'
 const earthBadge = 'https://cdn.bulbagarden.net/upload/7/78/Earth_Badge.png'
 
+//Gym Backgrounds
+let currentGym;
+const generic = 'https://images7.alphacoders.com/592/thumb-1920-592678.jpg'
+const rock = 'https://cdn.bulbagarden.net/upload/3/3b/Cyllage_Gym_anime.png'
+const fire = 'https://i2.wp.com/www.puclpodcast.com/wp-content/uploads/2017/08/pokemon-59-07.png?ssl=1'
+const water = 'https://cdn.bulbagarden.net/upload/a/aa/Cerulean_Gym_Battlefield_Water.png'
+const thunder = "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-lets-go-pikachu-eevee/b/bd/Screen_Shot_2018-11-20_at_2.14.34_AM.jpg?width=1600"
+const grass = 'https://cdn.bulbagarden.net/upload/7/79/Coumarine_Gym_battlefield.png'
+const poison = 'https://www.dailydot.com/wp-content/uploads/6be/6b/2eacbc39866d37fc53383ab86cf69b09.jpg'
+const psychic = 'https://i.ytimg.com/vi/b73KO2sHE74/maxresdefault.jpg'
+const psych = 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-lets-go-pikachu-eevee/c/cf/Screen_Shot_2018-11-30_at_2.35.12_PM.jpg?width=1280'
+const earth = 'https://cdn.bulbagarden.net/upload/7/7b/Driftveil_Gym_anime.png'
+
 //Page elements
 let currentUser;
 const htmlDoc = document.getElementsByTagName('html')[0]
@@ -67,7 +80,7 @@ function userShowPage(user) {
             fetchDeck()
             .then(response => response.json())
             .then(deck => {
-
+                gymLinks(deck)
                 let playButton = document.createElement('button');
                 playButton.innerText = "PLAY";
                 playButton.addEventListener('click',function(){
@@ -103,7 +116,9 @@ function fetchDeck() {
 
 function playGame(deck){
     body.innerHTML = "";
-
+    currentGym = event.target.classList[1];
+    setGym()
+    change(currentGym)
     let container = document.createElement('div');
     container.classList.add("parent");
 
@@ -572,6 +587,46 @@ function checkUsers(users, username, password) {
     }
 }
 
+function change(gym) {
+    body.style.backgroundImage = `url(${gym})`
+}
 
+function gymLinks(deck) {
+    gyms.forEach(gym => {
+        gym.addEventListener('click', () => {
+            playGame(deck)
+        })
+    })
+}
 
+function setGym() {
+    switch (currentGym) {
+        case 'rock':
+            currentGym = rock;
+            break;
+        case 'fire':
+            currentGym = fire;
+            break;
+        case 'water':
+            currentGym = water;
+            break;
+        case 'electric':
+            currentGym = thunder;
+            break;
+        case 'grass':
+            currentGym = grass;
+            break;
+        case 'poison':
+            currentGym = poison;
+            break;
+        case 'psychic':
+            currentGym = psychic;
+            break;
+        case 'ground':
+            currentGym = earth;
+            break;
+        default:
+            currentGym = generic;
+    }
+}
 
