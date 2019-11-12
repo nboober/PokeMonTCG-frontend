@@ -124,6 +124,7 @@ function playGame(deck){
 
     let gameInfo = document.createElement('div');
     gameInfo.classList.add("div1");
+    gameInfo.classList.add("black-background");
 
     let oppPokemonText = document.createElement('p');
     oppPokemonText.innerText = "Opponent's Pokemon Remaining: "
@@ -150,20 +151,24 @@ function playGame(deck){
     
     let oppHealth = document.createElement('div');
     oppHealth.classList.add("div3");
+    oppHealth.classList.add("black-background");
     //computerHPBar(oppHealth)
     
     let oppAttack = document.createElement('div');
     oppAttack.classList.add("div4");
-    
+    oppAttack.classList.add("black-background");
+
     let userCard = document.createElement('div');
     userCard.classList.add("div5");
     
     let userHealth = document.createElement('div');
     userHealth.classList.add("div6");
+    userHealth.classList.add("black-background");
    // myHPBar(userHealth)
     
     let userAttack = document.createElement('div');
     userAttack.classList.add("div7");
+    userAttack.classList.add("black-background");
     
     let userHand1 = document.createElement('div');
     userHand1.classList.add("div8");
