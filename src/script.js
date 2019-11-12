@@ -7,6 +7,7 @@ const grassBadge = 'https://cdn.bulbagarden.net/upload/b/b5/Rainbow_Badge.png'
 const psychicBadge = 'https://cdn.bulbagarden.net/upload/6/6b/Marsh_Badge.png'
 const poisonBadge = 'https://cdn.bulbagarden.net/upload/7/7d/Soul_Badge.png'
 const earthBadge = 'https://cdn.bulbagarden.net/upload/7/78/Earth_Badge.png'
+const genericBadge = 'https://img.rankedboost.com/wp-content/uploads/2016/07/Pokemon-Go-Pok%C3%A9dex.png'
 
 //Gym Backgrounds
 let currentGym;
@@ -643,6 +644,7 @@ function setGym() {
             break;
         default:
             currentGym = generic;
+            currentBadge = genericBadge;
     }
 }
 
