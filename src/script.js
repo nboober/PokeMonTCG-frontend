@@ -10,6 +10,7 @@ const earthBadge = 'https://cdn.bulbagarden.net/upload/7/78/Earth_Badge.png'
 
 //Gym Backgrounds
 let currentGym;
+let currentBadge;
 const generic = 'https://images7.alphacoders.com/592/thumb-1920-592678.jpg'
 const rock = 'https://cdn.bulbagarden.net/upload/3/3b/Cyllage_Gym_anime.png'
 const fire = 'https://i2.wp.com/www.puclpodcast.com/wp-content/uploads/2017/08/pokemon-59-07.png?ssl=1'
@@ -182,6 +183,13 @@ function playGame(deck){
     
     let userHand6 = document.createElement('div');
     userHand6.classList.add("div13");
+
+    const badgeDiv = document.createElement('div');
+    badgeDiv.id = 'badge-div'
+    const badgePic = document.createElement('img');
+    badgePic.src = currentBadge;
+    badgeDiv.appendChild(badgePic);
+    body.appendChild(badgeDiv)
 
     container.append(gameInfo,oppCard,oppHealth,oppAttack,userCard,userHealth,userAttack,userHand1,userHand2,userHand3,userHand4,userHand5,userHand6);
     
@@ -603,27 +611,35 @@ function setGym() {
     switch (currentGym) {
         case 'rock':
             currentGym = rock;
+            currentBadge = rockBadge;
             break;
         case 'fire':
             currentGym = fire;
+            currentBadge = fireBadge;
             break;
         case 'water':
             currentGym = water;
+            currentBadge = waterBadge;
             break;
         case 'electric':
             currentGym = thunder;
+            currentBadge = thunderBadge;
             break;
         case 'grass':
             currentGym = grass;
+            currentBadge = grassBadge;
             break;
         case 'poison':
             currentGym = poison;
+            currentBadge = poisonBadge;
             break;
         case 'psychic':
             currentGym = psychic;
+            currentBadge = psychicBadge;
             break;
         case 'ground':
             currentGym = earth;
+            currentBadge = earthBadge;
             break;
         default:
             currentGym = generic;
