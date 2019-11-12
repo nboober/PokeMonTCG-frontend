@@ -698,3 +698,5 @@ function displayCard() {
     cardPic.id = 'modal-pic'
     modalBody.appendChild(cardPic)
 }
+
+// function createDeck(type)
