@@ -32,6 +32,10 @@ body {
   margin-top: 150px;
 }
 
+#login-form{
+  color:white;
+}
+
 form {
   margin-left: 150px;
 }
@@ -117,6 +121,15 @@ form {
     width: 100%;
   }
   
+  .playByPlayContainer{
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  .playByPlay{
+    list-style-type: none;
+  }
+
   .parent {
       display: grid;
       grid-template-columns: repeat(7, 1fr);

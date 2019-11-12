@@ -122,6 +122,12 @@ function playGame(deck){
     userPokemonCount.id = "userPokemonCount";
     userPokemonCount.innerText = userRemainingPokemon;
 
+    let playByPlayContainer = document.createElement("div");
+    playByPlayContainer.classList.add('playByPlayContainer');
+    let playByPlay = document.createElement("ul");
+    playByPlay.classList.add('playByPlay');
+
+
     gameInfo.append(oppPokemonText,oppPokemonCount,userPokemonText,userPokemonCount)
 
     let oppCard = document.createElement('div');
