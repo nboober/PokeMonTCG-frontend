@@ -300,6 +300,7 @@ function playCard(){
         playByPlay.append(li);    
                 
         let userPlayCardContainer = document.querySelector('.div5');
+        userPlayCardContainer.setAttribute('hp', card.hp)
         userPlayCardContainer.innerHTML = "";
         let userPlayCard = document.createElement("img"); 
         let cardImage1 = card.imageUrl;
@@ -558,11 +559,11 @@ function updateCompHP(healthBox, oppCardHealthValue, userCardAttack) {
 }
 
 function updateUserHP(healthBox, userCardHealthValue, oppCardAttack) {
+    let userHp = healthBox.previousElementSibling.getAttribute('hp');
     let new_health_value = userCardHealthValue - oppCardAttack
-    let total_health_value = userCardHealthValue
-    let new_percentage = (new_health_value / total_health_value) * 100
+    let new_percentage = (new_health_value / userHp) * 100
     healthBox.children[0].children[0].children[0].style.width = `${new_percentage}%`
-    healthBox.getElementsByTagName('span')[0].innerText = `${new_health_value}/${total_health_value}`
+    healthBox.getElementsByTagName('span')[0].innerText = `${new_health_value}/${userHp}`
 }
 
 // function turnWait() {
@@ -587,7 +588,6 @@ function checkUsers(users, username, password) {
             userFound = true;
         }
     })
-    //debugger
     if (userFound) {
         console.log("succesful login")
         userShowPage(currentUser)
