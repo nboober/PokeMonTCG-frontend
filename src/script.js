@@ -144,6 +144,10 @@ function playGame(deck){
     playByPlay.classList.add('playByPlay');
     playByPlayContainer.append(playByPlay);
 
+    window.setInterval(function() {
+        playByPlayContainer.scrollTop = playByPlayContainer.scrollHeight;
+      }, 3000);
+
     gameInfo.append(oppPokemonText,oppPokemonCount,userPokemonText,userPokemonCount,playByPlayContainer)
 
     let oppCard = document.createElement('div');
