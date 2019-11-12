@@ -65,17 +65,15 @@ function userShowPage(user) {
     sidebar.removeAttribute('hidden')
     htmlDoc.style.display = "inline";
     body.style.display = "inline";
-    // body.style.backkgroundImage = none;
     loginDiv.classList.add("login")
     main.removeAttribute('hidden')
     header.innerText = `Welcome! ${user.name}`
-    const decksList = document.createElement('ul')
+    
     user.decks.forEach(deck => {
         const user_deck = document.createElement('li');
         user_deck.innerText = deck.name;
         user_deck.id = `deck-${deck.id}`
-        decksList.appendChild(user_deck)
-        decks.appendChild(decksList)
+        decks.appendChild(user_deck)
         user_deck.addEventListener('click', () => {
             currentDeck.innerText = `Currently Displaying: ${event.target.innerText}`
             deckCards.innerText = ""
@@ -84,7 +82,8 @@ function userShowPage(user) {
             .then(deck => {
                 gymLinks(deck)
                 let playButton = document.createElement('button');
-                playButton.innerText = "PLAY";
+                playButton.innerText = "Training";
+                playButton.classList.add("red_button")
                 playButton.addEventListener('click',function(){
                     playGame(deck)
                 })
@@ -427,7 +426,7 @@ function swapPokemon(parent,id){
         let playByPlay = document.querySelector('.playByPlay');
         let li = document.createElement('li');
         li.classList.add("userPlays");
-        li.innerText = `${card.name} has been taken out of play.`;
+        li.innerText = `${card.name} has been taken out of play`;
         playByPlay.append(li);       
 
         cardContainer.addEventListener("click", playCard);
