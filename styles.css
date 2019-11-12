@@ -173,6 +173,11 @@ form {
     color: red;
   }
 
+  .div7 > p:hover{
+    cursor: pointer;
+    background-color: red;
+  }
+
   .parent {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
