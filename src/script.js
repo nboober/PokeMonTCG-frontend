@@ -65,17 +65,15 @@ function userShowPage(user) {
     sidebar.removeAttribute('hidden')
     htmlDoc.style.display = "inline";
     body.style.display = "inline";
-    // body.style.backkgroundImage = none;
     loginDiv.classList.add("login")
     main.removeAttribute('hidden')
     header.innerText = `Welcome! ${user.name}`
-    const decksList = document.createElement('ul')
+    
     user.decks.forEach(deck => {
         const user_deck = document.createElement('li');
         user_deck.innerText = deck.name;
         user_deck.id = `deck-${deck.id}`
-        decksList.appendChild(user_deck)
-        decks.appendChild(decksList)
+        decks.appendChild(user_deck)
         user_deck.addEventListener('click', () => {
             currentDeck.innerText = `Currently Displaying: ${event.target.innerText}`
             deckCards.innerText = ""

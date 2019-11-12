@@ -108,6 +108,21 @@ form {
   .sidenav a:hover {
     color: #f1f1f1;
   }
+
+  #deck-5:hover{
+    cursor: pointer;
+    color: white;
+  }
+
+  #deck-6:hover{
+    cursor: pointer;
+    color: white;
+  }
+
+  .gym:hover{
+    cursor: pointer;
+    color: white;
+  }
   
   .red_button{
     background-color: red;
