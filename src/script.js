@@ -84,7 +84,8 @@ function userShowPage(user) {
             .then(deck => {
                 gymLinks(deck)
                 let playButton = document.createElement('button');
-                playButton.innerText = "PLAY";
+                playButton.innerText = "Training";
+                playButton.classList.add("red_button")
                 playButton.addEventListener('click',function(){
                     playGame(deck)
                 })
