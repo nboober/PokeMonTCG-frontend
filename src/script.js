@@ -324,6 +324,11 @@ function playCard(){
 function playEnemyCard(deck){
     let randNumber = Math.floor(Math.random() * 60);
 
+    let playByPlay = document.querySelector('.playByPlay');
+    let li = document.createElement('li');
+    li.innerText = `The opponent plays ${deck.cards[randNumber].name}`;
+    playByPlay.append(li);   
+
     let oppCardContainer = document.querySelector(".div2");
     oppCardContainer.setAttribute('hp', deck.cards[randNumber].hp)
     oppCardContainer.innerHTML = "";
@@ -371,7 +376,20 @@ function attackOpp(card){
 
     updateCompHP(oppCardHealth, oppCardHealthValue, attackDamage)
     let currentHealth= Number(oppCardHealth.innerText.split("/")[0])
+
+    let playByPlay = document.querySelector('.playByPlay');
+    let li = document.createElement('li');
+    let attackname = event.target.innerText.split(" - ")[0]
+    li.innerText = `${card.name} attacks opponent with ${attackname} for ${attackDamage} damage`;
+    playByPlay.append(li);   
+
     if(currentHealth <= 0){
+
+        let playByPlay = document.querySelector('.playByPlay');
+        let li = document.createElement('li');
+        li.innerText = `The opponent's Pokemon Fainted!`;
+        playByPlay.append(li);   
+
         let id = card.deck_id;
         let oppPokemonCount = document.getElementById("oppPokemonCount");
         oppCardHealth.innerHTML = ""
@@ -416,6 +434,12 @@ function oppAttackUser(){
     updateUserHP(userCardHealth, userCardHealthValue, oppCardAttack)
     let current_health = Number(userCardHealth.innerText.split("/")[0])
     if( current_health <= 0){
+
+        let playByPlay = document.querySelector('.playByPlay');
+        let li = document.createElement('li');
+        li.innerText = `The User's Pokemon Fainted!`;
+        playByPlay.append(li);   
+
         userCard.innerHTML = "";
         userCardHealth.innerHTML = "";
         userCardAttack.innerHTML = "";
@@ -479,7 +503,6 @@ function updateCompHP(healthBox, oppCardHealthValue, userCardAttack) {
     
     healthBox.children[0].children[0].style.width = `${new_percentage}%`
     healthBox.getElementsByTagName('span')[0].innerText = `${new_health_value}/${oppHp}`
-    debugger
 }
 
 function updateUserHP(healthBox, userCardHealthValue, oppCardAttack) {
