@@ -181,7 +181,7 @@ function drawCards(deck){
 
     let playByPlay = document.querySelector('.playByPlay');
     let li = document.createElement('li');
-    li.innerText = "User and Opponent Draw 6 Cards";
+    li.innerText = "The User and Opponent Draw 6 Cards";
     playByPlay.append(li);
 
     let userPlayCardContainer = document.querySelector('.div5');
@@ -271,6 +271,7 @@ function playCard(){
 
         let playByPlay = document.querySelector('.playByPlay');
         let li = document.createElement('li');
+        li.classList.add("userPlays")
         li.innerText = `User plays ${card.name}`;
         playByPlay.append(li);    
                 
@@ -326,11 +327,13 @@ function playEnemyCard(deck){
 
     let playByPlay = document.querySelector('.playByPlay');
     let li = document.createElement('li');
+    li.classList.add("oppPlays")
     li.innerText = `The opponent plays ${deck.cards[randNumber].name}`;
     playByPlay.append(li);   
 
     let oppCardContainer = document.querySelector(".div2");
     oppCardContainer.setAttribute('hp', deck.cards[randNumber].hp)
+    oppCardContainer.setAttribute('name', deck.cards[randNumber].name)
     oppCardContainer.innerHTML = "";
     let cardImageTag = document.createElement("img"); 
     let cardImage = deck.cards[randNumber].imageUrl;
@@ -379,16 +382,17 @@ function attackOpp(card){
 
     let playByPlay = document.querySelector('.playByPlay');
     let li = document.createElement('li');
+    li.classList.add("userPlays");
     let attackname = event.target.innerText.split(" - ")[0]
     li.innerText = `${card.name} attacks opponent with ${attackname} for ${attackDamage} damage`;
     playByPlay.append(li);   
 
     if(currentHealth <= 0){
 
-        let playByPlay = document.querySelector('.playByPlay');
-        let li = document.createElement('li');
-        li.innerText = `The opponent's Pokemon Fainted!`;
-        playByPlay.append(li);   
+        let li2 = document.createElement('li');
+        li2.classList.add("oppPlays")
+        li2.innerText = `The opponent's Pokemon Fainted!`;
+        playByPlay.append(li2);   
 
         let id = card.deck_id;
         let oppPokemonCount = document.getElementById("oppPokemonCount");
@@ -396,9 +400,10 @@ function attackOpp(card){
         let newCount = --oppRemainingPokemon;
         oppPokemonCount.innerText = newCount;
 
-        let li2 = document.createElement('li');
-        li2.innerText = `The User is down to ${newCount} Pokemon!`;
-        playByPlay.append(li2);   
+        let li3 = document.createElement('li');
+        li3.classList.add("oppPlays")
+        li3.innerText = `The Opponent is down to ${newCount} Pokemon!`;
+        playByPlay.append(li3);   
 
         if(oppPokemonCount.innerText == 0){
             win();
@@ -417,6 +422,7 @@ function attackOpp(card){
 
 function oppAttackUser(){
     console.log("opponent attacking");
+    let oppCard = document.querySelector('.div2');
     let userCard = document.querySelector('.div5');
     let userCardHealth = document.querySelector('.div6');
     let userCardAttack = document.querySelector('.div7');
@@ -427,22 +433,34 @@ function oppAttackUser(){
     let oppCardAttack2 = parseInt(oppCardAttackContainer.lastChild.id);
     let randomAttack = Math.ceil(Math.random() * 2);
 
+    let pokemonName = oppCard.getAttribute("name");
     let oppCardAttack = 0;
+    let attackname;
 
     if(randomAttack == 1){
         oppCardAttack = oppCardAttack1;
+        attackname = oppCardAttackContainer.firstChild.innerText.split(" - ")[0]
     }else if(randomAttack == 2){
         oppCardAttack = oppCardAttack2;
+        attackname = oppCardAttackContainer.lastChild.innerText.split(" - ")[0]
     }
 
     updateUserHP(userCardHealth, userCardHealthValue, oppCardAttack)
     let current_health = Number(userCardHealth.innerText.split("/")[0])
+
+    let playByPlay = document.querySelector('.playByPlay');
+    let li = document.createElement('li');
+    li.classList.add("oppPlays")
+    li.innerText = `The Opponent's ${pokemonName} attacked the user with ${attackname} for ${oppCardAttack} damage!`;
+    playByPlay.append(li);   
+
+
     if( current_health <= 0){
 
-        let playByPlay = document.querySelector('.playByPlay');
-        let li = document.createElement('li');
-        li.innerText = `The User's Pokemon Fainted!`;
-        playByPlay.append(li);   
+        let li2 = document.createElement('li');
+        li2.classList.add("userPlays");
+        li2.innerText = `The User's Pokemon Fainted!`;
+        playByPlay.append(li2);   
 
         userCard.innerHTML = "";
         userCardHealth.innerHTML = "";
@@ -452,9 +470,10 @@ function oppAttackUser(){
         let newCount = --userRemainingPokemon;
         userPokemonCount.innerText = newCount;
 
-        let li2 = document.createElement('li');
-        li2.innerText = `The User is down to ${newCount} Pokemon!`;
-        playByPlay.append(li2);   
+        let li3 = document.createElement('li');
+        li3.classList.add("userPlays");
+        li3.innerText = `The User is down to ${newCount} Pokemon!`;
+        playByPlay.append(li3);   
 
 
         if(userPokemonCount.innerText == 0){
