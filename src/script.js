@@ -117,7 +117,7 @@ function playGame(deck){
     oppPokemonCount.innerText = oppRemainingPokemon;
     
     let userPokemonText = document.createElement('p');
-    userPokemonText.innerText = "\n\n\nUser's Pokemon Remaining: "
+    userPokemonText.innerText = "\nUser's Pokemon Remaining: "
     let userPokemonCount = document.createElement('p');
     userPokemonCount.id = "userPokemonCount";
     userPokemonCount.innerText = userRemainingPokemon;
@@ -126,9 +126,9 @@ function playGame(deck){
     playByPlayContainer.classList.add('playByPlayContainer');
     let playByPlay = document.createElement("ul");
     playByPlay.classList.add('playByPlay');
+    playByPlayContainer.append(playByPlay);
 
-
-    gameInfo.append(oppPokemonText,oppPokemonCount,userPokemonText,userPokemonCount)
+    gameInfo.append(oppPokemonText,oppPokemonCount,userPokemonText,userPokemonCount,playByPlayContainer)
 
     let oppCard = document.createElement('div');
     oppCard.classList.add("div2");
@@ -178,6 +178,11 @@ function playGame(deck){
 
 function drawCards(deck){
     console.log(deck);
+
+    let playByPlay = document.querySelector('.playByPlay');
+    let li = document.createElement('li');
+    li.innerText = "User and Opponent Draw 6 Cards";
+    playByPlay.append(li);
 
     let userPlayCardContainer = document.querySelector('.div5');
 
@@ -263,6 +268,11 @@ function playCard(){
     .then(response => response.json())
     .then(card => {
         console.log(card);
+
+        let playByPlay = document.querySelector('.playByPlay');
+        let li = document.createElement('li');
+        li.innerText = `User plays ${card.name}`;
+        playByPlay.append(li);    
                 
         let userPlayCardContainer = document.querySelector('.div5');
         userPlayCardContainer.innerHTML = "";
@@ -274,6 +284,7 @@ function playCard(){
         userPlayCardContainer.appendChild(userPlayCard);
         
         let userCardHealth = document.querySelector('.div6');
+        userCardHealth.innerHTML = "";
         let userCardAttack = document.querySelector('.div7');
 
         let healthDiv = document.createElement('div');
