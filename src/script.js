@@ -36,7 +36,8 @@ const gyms = Array.from(document.getElementsByClassName('gym'))
 const backCardImg = "https://images.pokemontcg.io/xyp/XY154_hires.png"
 const body = document.getElementsByTagName('body')[0]
 const sidebar = document.getElementsByClassName('sidenav')[0]
-const main = document.getElementById('main')
+const main = document.getElementById('main');
+const modalBody = document.getElementsByClassName('modal-body')[0];
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -108,6 +109,9 @@ function renderCards (card) {
     image.src = card.imageUrl
     cardDiv.appendChild(image);
     deckCards.appendChild(cardDiv)
+    cardDiv.setAttribute('data-toggle', "modal");
+    cardDiv.setAttribute('data-target', "#exampleModal");
+    cardDiv.addEventListener('click', displayCard)
 }
 
 function fetchDeck() {
@@ -687,3 +691,10 @@ function setGym() {
     }
 }
 
+function displayCard() {
+    modalBody.innerText = ""
+    const cardPic = document.createElement('img');
+    cardPic.src = event.target.src;
+    cardPic.id = 'modal-pic'
+    modalBody.appendChild(cardPic)
+}
