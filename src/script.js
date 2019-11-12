@@ -39,7 +39,6 @@ const sidebar = document.getElementsByClassName('sidenav')[0]
 const main = document.getElementById('main');
 const modalBody = document.getElementsByClassName('modal-body')[0];
 
-
 document.addEventListener('DOMContentLoaded', () => {
     
     loginForm.addEventListener('submit', login)
@@ -68,7 +67,7 @@ function userShowPage(user) {
     body.style.display = "inline";
     loginDiv.classList.add("login")
     main.removeAttribute('hidden')
-    header.innerText = `Welcome! ${user.name}`
+    header.innerText = `Welcome ${user.name}!`
 
     user.decks.forEach(deck => {
         const user_deck = document.createElement('li');
