@@ -294,8 +294,16 @@ function drawCards(deck){
 }
 
 function playCard(){
+    let parent = event.target.parentElement;
     event.target.remove();
     let id = event.target.id;
+
+    let oppCardContainer = document.querySelector(".div5");
+    if(oppCardContainer.childElementCount){
+        let swappedPokemonId = oppCardContainer.firstElementChild.id;
+        
+        swapPokemon(parent, swappedPokemonId);
+    }
     
     fetch(`http://localhost:3000/cards/${id}`)
     .then(response => response.json())
@@ -400,6 +408,23 @@ function playEnemyCard(deck){
     }else{
         oppCardAttack.append(attack1);
     }
+}
+
+function swapPokemon(parent,id){
+    
+    console.log("Pokemon swapped");
+    fetch(`http://localhost:3000/cards/${id}`)
+    .then(response => response.json())
+    .then(card => {
+        let cardContainer = document.createElement("img"); 
+        let cardImage = card.imageUrl;
+        let cardId = card.id;
+        cardContainer.id = cardId;
+        cardContainer.src = cardImage;
+        parent.appendChild(cardContainer);
+        
+        cardContainer.addEventListener("click", playCard);
+    })
 }
 
 function attackOpp(card){
