@@ -424,6 +424,12 @@ function swapPokemon(parent,id){
         cardContainer.src = cardImage;
         parent.appendChild(cardContainer);
         
+        let playByPlay = document.querySelector('.playByPlay');
+        let li = document.createElement('li');
+        li.classList.add("userPlays");
+        li.innerText = `${card.name} has been taken out of play.`;
+        playByPlay.append(li);       
+
         cardContainer.addEventListener("click", playCard);
     })
 }
