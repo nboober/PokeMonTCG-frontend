@@ -396,6 +396,10 @@ function attackOpp(card){
         let newCount = --oppRemainingPokemon;
         oppPokemonCount.innerText = newCount;
 
+        let li2 = document.createElement('li');
+        li2.innerText = `The User is down to ${newCount} Pokemon!`;
+        playByPlay.append(li2);   
+
         if(oppPokemonCount.innerText == 0){
             win();
         }
@@ -447,6 +451,11 @@ function oppAttackUser(){
         let userPokemonCount = document.getElementById("userPokemonCount");
         let newCount = --userRemainingPokemon;
         userPokemonCount.innerText = newCount;
+
+        let li2 = document.createElement('li');
+        li2.innerText = `The User is down to ${newCount} Pokemon!`;
+        playByPlay.append(li2);   
+
 
         if(userPokemonCount.innerText == 0){
             lose();
