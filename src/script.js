@@ -126,6 +126,7 @@ function playGame(deck){
 
     let gameInfo = document.createElement('div');
     gameInfo.classList.add("div1");
+    gameInfo.classList.add("black-background");
 
     let oppPokemonText = document.createElement('p');
     oppPokemonText.innerText = "Opponent's Pokemon Remaining: "
@@ -145,6 +146,10 @@ function playGame(deck){
     playByPlay.classList.add('playByPlay');
     playByPlayContainer.append(playByPlay);
 
+    window.setInterval(function() {
+        playByPlayContainer.scrollTop = playByPlayContainer.scrollHeight;
+      }, 3000);
+
     gameInfo.append(oppPokemonText,oppPokemonCount,userPokemonText,userPokemonCount,playByPlayContainer)
 
     let oppCard = document.createElement('div');
@@ -152,20 +157,24 @@ function playGame(deck){
     
     let oppHealth = document.createElement('div');
     oppHealth.classList.add("div3");
+    oppHealth.classList.add("black-background");
     //computerHPBar(oppHealth)
     
     let oppAttack = document.createElement('div');
     oppAttack.classList.add("div4");
-    
+    oppAttack.classList.add("black-background");
+
     let userCard = document.createElement('div');
     userCard.classList.add("div5");
     
     let userHealth = document.createElement('div');
     userHealth.classList.add("div6");
+    userHealth.classList.add("black-background");
    // myHPBar(userHealth)
     
     let userAttack = document.createElement('div');
     userAttack.classList.add("div7");
+    userAttack.classList.add("black-background");
     
     let userHand1 = document.createElement('div');
     userHand1.classList.add("div8");
@@ -285,8 +294,16 @@ function drawCards(deck){
 }
 
 function playCard(){
+    let parent = event.target.parentElement;
     event.target.remove();
     let id = event.target.id;
+
+    let oppCardContainer = document.querySelector(".div5");
+    if(oppCardContainer.childElementCount){
+        let swappedPokemonId = oppCardContainer.firstElementChild.id;
+        
+        swapPokemon(parent, swappedPokemonId);
+    }
     
     fetch(`http://localhost:3000/cards/${id}`)
     .then(response => response.json())
@@ -392,6 +409,23 @@ function playEnemyCard(deck){
     }else{
         oppCardAttack.append(attack1);
     }
+}
+
+function swapPokemon(parent,id){
+    
+    console.log("Pokemon swapped");
+    fetch(`http://localhost:3000/cards/${id}`)
+    .then(response => response.json())
+    .then(card => {
+        let cardContainer = document.createElement("img"); 
+        let cardImage = card.imageUrl;
+        let cardId = card.id;
+        cardContainer.id = cardId;
+        cardContainer.src = cardImage;
+        parent.appendChild(cardContainer);
+        
+        cardContainer.addEventListener("click", playCard);
+    })
 }
 
 function attackOpp(card){
