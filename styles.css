@@ -20,6 +20,10 @@ body {
   color: white;
 }
 
+audio{
+  display: none;
+}
+
 .login {
   display: none;
 }

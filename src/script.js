@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //         renderGymBoard()
 //     })
 // })
-
+// audio.src = URL.createObjectURL(document.getElementsByTagName('input')[0].files[0]);
 })
 var oppRemainingPokemon = 6;
 var userRemainingPokemon = 6;
@@ -68,7 +68,7 @@ function userShowPage(user) {
     loginDiv.classList.add("login")
     main.removeAttribute('hidden')
     header.innerText = `Welcome! ${user.name}`
-    
+
     user.decks.forEach(deck => {
         const user_deck = document.createElement('li');
         user_deck.innerText = deck.name;
