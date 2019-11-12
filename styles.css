@@ -150,6 +150,11 @@ form {
   img{
     width: 160px;
   }
+
+  #modal-pic {
+    height: 750px;
+    width: auto;
+  }
   
   p{
     width: 100%;
