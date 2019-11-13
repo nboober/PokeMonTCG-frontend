@@ -336,7 +336,6 @@ function playCard(){
         userPlayCard.src = cardImage1;
         userPlayCardContainer.appendChild(userPlayCard);
         
-        //if(health !< card.hp)
         let userCardHealth = document.querySelector('.div6');
         userCardHealth.innerHTML = "";
         let userCardAttack = document.querySelector('.div7');

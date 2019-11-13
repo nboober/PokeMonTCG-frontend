@@ -230,7 +230,7 @@ form {
   }
 
   .red-outline{
-    border: 3px solid red;
+    border: 6px solid red;
   }
 
     .div1 { grid-area: 2 / 1 / 6 / 3; }
