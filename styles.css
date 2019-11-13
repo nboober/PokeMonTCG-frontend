@@ -116,16 +116,17 @@ form {
   }
   
   /* When you mouse over the navigation links, change their color */
+  .sidenav a{
+    color: black;
+  }
+  
   .sidenav a:hover {
-    color: #f1f1f1;
+    /* color: #f1f1f1; */
+    text-decoration: none;
+    color:black;
   }
 
-  #deck-5:hover{
-    cursor: pointer;
-    color: white;
-  }
-
-  #deck-6:hover{
+  #decks > li:hover{
     cursor: pointer;
     color: white;
   }
