@@ -61,10 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
 var oppRemainingPokemon = 6;
 var userRemainingPokemon = 6;
 
-function updateUser(user) {
+function updateUser(user, deck) {
     fetch(`http://localhost:3000/users/${user.id}`)
     .then(response => response.json())
-    .then(user => userShowPage(user))
+    .then(user => {
+        userShowPage(user)
+        cards.innerText = ""
+        deck.cards.forEach(card => renderCards(card))
+    })
 
 }
 
@@ -958,7 +962,7 @@ function createDeck() {
     .then(response => response.json())
    .then(response => {
        decks.innerHTML = ""
-       updateUser(currentUser)
+       updateUser(currentUser, response)
         console.log(response)})
 }
 
