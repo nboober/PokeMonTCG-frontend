@@ -68,6 +68,10 @@ form {
     grid-template-columns: repeat(auto-fill, minmax(170px, 1fr))
 }
 
+#cards > div > img:hover{
+  transform: scale(1.1);
+}
+
 .single-card {
     height: auto;
     width: auto;
@@ -151,6 +155,10 @@ form {
     width: 160px;
   }
 
+  img:hover{
+    cursor: pointer;
+  }
+
   #modal-pic {
     height: 750px;
     width: auto;
@@ -162,7 +170,7 @@ form {
   
   .playByPlayContainer{
     width: 100%;
-    height:119px;
+    height:143px;
     /* display:table; */
     overflow-y: scroll;
   }
@@ -201,6 +209,13 @@ form {
       border: 1px solid white;
       color: white;
       text-align: center;
+  }
+
+  .parent > div > img:hover{
+    transform: scale(1.1);
+    -webkit-box-shadow: 0px 0px 35px 13px rgba(0,0,0,0.34);
+    -moz-box-shadow: 0px 0px 35px 13px rgba(0,0,0,0.34);
+    box-shadow: 0px 0px 35px 13px rgba(0,0,0,0.34);
   }
 
   .black-background{

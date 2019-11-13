@@ -137,7 +137,7 @@ function playGame(deck){
     oppPokemonCount.innerText = oppRemainingPokemon;
     
     let userPokemonText = document.createElement('p');
-    userPokemonText.innerText = "\nUser's Pokemon Remaining: "
+    userPokemonText.innerText = "User's Pokemon Remaining: "
     let userPokemonCount = document.createElement('p');
     userPokemonCount.id = "userPokemonCount";
     userPokemonCount.innerText = userRemainingPokemon;
