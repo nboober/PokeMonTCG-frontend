@@ -132,6 +132,10 @@ function fetchDeck() {
 
 function playGame(deck){
     body.innerHTML = "";
+
+    let pokemonTheme = new Audio("Pokemon-Theme-Song.mp3");
+    pokemonTheme.play()
+
     currentGym = event.target.classList[1];
     setGym()
     change(currentGym)
@@ -431,7 +435,7 @@ function playEnemyCard(deck){
     attack1.innerText = `${deck.cards[randNumber].attack_name} - ${deck.cards[randNumber].attack_damage} damage`;
     attack1.id = deck.cards[randNumber].attack_damage;
     
-    if(deck.cards[randNumber].attack_name_2 != null){
+    if(deck.cards[randNumber].attack_name_2 != "No Attack"){
         attack2.innerText = `${deck.cards[randNumber].attack_name_2} - ${deck.cards[randNumber].attack_damage_2} damage`;
         attack2.id = deck.cards[randNumber].attack_damage_2;
 
