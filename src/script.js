@@ -725,6 +725,8 @@ function renderForm() {
     type2.id = "second-type"
     const nameDeck = document.createElement('input')
     nameDeck.type = 'text'
+    nameDeck.id = "deck-name"
+    nameDeck.placeholder = "Name Your Deck"
     const createSubmit = document.createElement('input')
     createSubmit.type = "submit"
     createSubmit.value = "Create Deck"
@@ -807,13 +809,21 @@ function createDeck() {
     event.preventDefault()
     const firstType = document.getElementById('first-type').value
     const secondType = document.getElementById('second-type').value
+    const deck_name = document.getElementById('deck-name').value
+
+    const configObj = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({user_id: currentUser.id, type1: firstType, type2: secondType, deck_name: deck_name})
+    }
     
 
-    fetch(`https://api.pokemontcg.io/v1/cards?types=${firstType}|${secondType}`)
+    fetch("http://localhost:3000/decks", configObj)
     .then(response => response.json())
-    .then(response => {
-        response.cards.forEach(card => cardsForDeck.push(card))   
-    })
+   .then(response => console.log(response))
 }
 
 function postDeckToUser() {
