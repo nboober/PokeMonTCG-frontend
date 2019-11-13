@@ -20,6 +20,10 @@ body {
   color: white;
 }
 
+audio{
+  display: none;
+}
+
 .login {
   display: none;
 }
@@ -62,6 +66,10 @@ form {
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(auto-fill, minmax(170px, 1fr))
+}
+
+#cards > div > img:hover{
+  transform: scale(1.1);
 }
 
 .single-card {
@@ -133,6 +141,12 @@ form {
     width: 100%;
     height: 100px;
   }
+  
+  .red_button:hover{
+    background-color: orange;
+    color: black;
+    border: 1px solid black;
+  }
 
   /* Style page content */
   .main {
@@ -150,6 +164,10 @@ form {
     width: 160px;
   }
 
+  img:hover{
+    cursor: pointer;
+  }
+
   #modal-pic {
     height: 750px;
     width: auto;
@@ -161,7 +179,7 @@ form {
   
   .playByPlayContainer{
     width: 100%;
-    height:119px;
+    height:143px;
     /* display:table; */
     overflow-y: scroll;
   }
@@ -202,9 +220,20 @@ form {
       text-align: center;
   }
 
+  .parent > div > img:hover{
+    transform: scale(1.1);
+    -webkit-box-shadow: 0px 0px 35px 13px rgba(0,0,0,0.34);
+    -moz-box-shadow: 0px 0px 35px 13px rgba(0,0,0,0.34);
+    box-shadow: 0px 0px 35px 13px rgba(0,0,0,0.34);
+  }
+
   .black-background{
     background-color: black;
     opacity: 0.8;
+  }
+
+  .red-outline{
+    border: 3px solid red;
   }
 
     .div1 { grid-area: 2 / 1 / 6 / 3; }
