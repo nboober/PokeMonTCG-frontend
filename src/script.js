@@ -199,7 +199,7 @@ function playGame(deck){
     let drawDiv = document.createElement('div');
     drawDiv.classList.add("div14");
     let image = document.createElement("img");
-    image.src = "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Pokemon_Trading_Card_Game_cardback.jpg/220px-Pokemon_Trading_Card_Game_cardback.jpg";
+    image.src = backCardImg;
     drawDiv.appendChild(image);
     image.addEventListener("click", function(){
         drawNewCard(deck);
