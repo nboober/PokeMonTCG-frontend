@@ -38,6 +38,7 @@ const body = document.getElementsByTagName('body')[0]
 const sidebar = document.getElementsByClassName('sidenav')[0]
 const main = document.getElementById('main');
 const modalBody = document.getElementsByClassName('modal-body')[0];
+const createDeckBtn = document.getElementById('create-button')
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -69,7 +70,7 @@ function userShowPage(user) {
     loginDiv.classList.add("login")
     main.removeAttribute('hidden')
     header.innerText = `Welcome! ${user.name}`
-    
+    createDeckBtn.addEventListener('click', renderForm)
     user.decks.forEach(deck => {
         const user_deck = document.createElement('li');
         user_deck.innerText = deck.name;
@@ -699,4 +700,121 @@ function displayCard() {
     modalBody.appendChild(cardPic)
 }
 
-// function createDeck(type)
+function renderForm() {
+    body.innerHTML = ""
+    const createForm = document.createElement('form');
+    const type1 = document.createElement('select');
+    type1.id = "first-type"
+    const type2 = document.createElement('select')
+    type2.id = "second-type"
+    const nameDeck = document.createElement('input')
+    nameDeck.type = 'text'
+    const createSubmit = document.createElement('input')
+    createSubmit.type = "submit"
+    createSubmit.value = "Create Deck"
+
+    const fire = document.createElement('option')
+    fire.setAttribute("value", "fire");
+    fire.innerText = "Fire"
+    type1.appendChild(fire)
+    type2.appendChild(fire.cloneNode(true))
+
+    const water = document.createElement('option')
+    water.setAttribute("value", "water");
+    water.innerText = "Water"
+    type1.appendChild(water)
+    type2.appendChild(water.cloneNode(true))
+
+    const grass = document.createElement('option')
+    grass.setAttribute("value", "grass");
+    grass.innerText = "Grass"
+    type1.appendChild(grass)
+    type2.appendChild(grass.cloneNode(true))
+
+    const lightning = document.createElement('option')
+    lightning.setAttribute("value", "lightning");
+    lightning.innerText = "Lightning"
+    type1.appendChild(lightning)
+    type2.appendChild(lightning.cloneNode(true))
+
+    const psychic = document.createElement('option')
+    psychic.setAttribute("value", "psychic");
+    psychic.innerText = "Psychic"
+    type1.appendChild(psychic)
+    type2.appendChild(psychic.cloneNode(true))
+
+    const colorless = document.createElement('option')
+    colorless.setAttribute("value", "colorless");
+    colorless.innerText = "Colorless"
+    type1.appendChild(colorless)
+    type2.appendChild(colorless.cloneNode(true))
+
+    const darkness = document.createElement('option')
+    darkness.setAttribute("value", "darkness");
+    darkness.innerText = "Darkness"
+    type1.appendChild(darkness)
+    type2.appendChild(darkness.cloneNode(true))
+
+    const dragon = document.createElement('option')
+    dragon.setAttribute("value", "dragon");
+    dragon.innerText = "Dragon"
+    type1.appendChild(dragon)
+    type2.appendChild(dragon.cloneNode(true))
+
+    const fairy = document.createElement('option')
+    fairy.setAttribute("value", "fairy");
+    fairy.innerText = "Fairy"
+    type1.appendChild(fairy)
+    type2.appendChild(fairy.cloneNode(true))
+
+    const fighting = document.createElement('option')
+    fighting.setAttribute("value", "fighting");
+    fighting.innerText = "Fighting"
+    type1.appendChild(fighting)
+    type2.appendChild(fighting.cloneNode(true))
+
+    const metal = document.createElement('option')
+    metal.setAttribute("value", "metal");
+    metal.innerText = "Metal"
+    type1.appendChild(metal)
+    type2.appendChild(metal.cloneNode(true))
+
+    createForm.appendChild(type1)
+    createForm.appendChild(type2)
+    createForm.appendChild(nameDeck)
+    createForm.appendChild(createSubmit)
+    body.appendChild(createForm)
+    createForm.addEventListener('submit', createDeck)
+}
+
+function createDeck() {
+    event.preventDefault()
+    const firstType = document.getElementById('first-type').value
+    const secondType = document.getElementById('second-type').value
+    
+
+    fetch(`https://api.pokemontcg.io/v1/cards?types=${firstType}|${secondType}`)
+    .then(response => response.json())
+    .then(response => {
+        response.cards.forEach(card => cardsForDeck.push(card))   
+    })
+}
+
+function postDeckToUser() {
+    event.preventDefault()
+    const firstType = document.getElementById('first-type').value
+    const secondType = document.getElementById('second-type').value
+    
+    const configObj = {
+        method: "POST",
+        header: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({})
+    }
+
+    fetch(`https://api.pokemontcg.io/v1/cards?types=${firstType}|${secondType}`)
+    .then(response => response.json())
+    .then(response => console.log(response))
+}
