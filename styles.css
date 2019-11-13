@@ -229,6 +229,10 @@ form {
     opacity: 0.8;
   }
 
+  .red-outline{
+    border: 3px solid red;
+  }
+
     .div1 { grid-area: 2 / 1 / 6 / 3; }
     .div2 { grid-area: 1 / 4 / 4 / 5; }
     .div3 { grid-area: 1 / 5 / 2 / 6; }

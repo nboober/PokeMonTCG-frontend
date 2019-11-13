@@ -421,13 +421,16 @@ function playEnemyCard(deck){
     }
 }
 
-function swapPokemon(parent,id, health){
+function swapPokemon(parent, id, health){
     
     console.log("Pokemon swapped");
     fetch(`http://localhost:3000/cards/${id}`)
     .then(response => response.json())
     .then(card => {
         let cardContainer = document.createElement("img"); 
+        if(health < card.hp){
+            cardContainer.classList.add("red-outline");
+        }
         let cardImage = card.imageUrl;
         let cardId = card.id;
         cardContainer.id = cardId;
