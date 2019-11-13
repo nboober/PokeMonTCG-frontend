@@ -494,11 +494,11 @@ function attackOpp(card){
         })
 
     }else{
-        oppAttackUser();
+        oppAttackUser(card);
     }
 }
 
-function oppAttackUser(){
+function oppAttackUser(card){
     console.log("opponent attacking");
     let oppCard = document.querySelector('.div2');
     let userCard = document.querySelector('.div5');
@@ -536,6 +536,7 @@ function oppAttackUser(){
     li.innerText = `The Opponent's ${pokemonName} attacked the user with ${attackname} for ${oppCardAttack} damage!`;
     playByPlay.append(li);   
 
+    drawNewCard(card);
 
     if( current_health <= 0){
 
@@ -561,6 +562,141 @@ function oppAttackUser(){
         if(userPokemonCount.innerText == 0){
             lose();
         }
+    }
+}
+
+function drawNewCard(card){
+
+    let deck_id = card.deck_id;
+
+    let hand1 = document.querySelector(".div8");
+    let hand2 = document.querySelector(".div9");
+    let hand3 = document.querySelector(".div10");
+    let hand4 = document.querySelector(".div11");
+    let hand5 = document.querySelector(".div12");
+    let hand6 = document.querySelector(".div13");
+    
+    if(hand1.childElementCount == 0){
+        let playByPlay = document.querySelector('.playByPlay');
+        let li = document.createElement('li');
+        li.classList.add("userPlays");
+        li.innerText = "The User draws 1 Card";
+        playByPlay.append(li);
+        let randNumber = Math.floor(Math.random() * 60);
+        fetch(`http://localhost:3000/decks/${deck_id}`)
+        .then(response => response.json())
+        .then(deck => {
+            let cardContainer = document.createElement("img"); 
+            cardContainer.setAttribute("health", deck.cards[randNumber].hp);
+            let cardImage = deck.cards[randNumber].imageUrl;
+            let cardId = deck.cards[randNumber].id;
+            cardContainer.id = cardId;
+            cardContainer.src = cardImage;
+            hand1.appendChild(cardContainer);
+            cardContainer.addEventListener("click", playCard);
+        })
+        
+    }else if(hand2.childElementCount == 0){
+        let playByPlay = document.querySelector('.playByPlay');
+        let li = document.createElement('li');
+        li.classList.add("userPlays");
+        li.innerText = "The User draws 1 Card";
+        playByPlay.append(li);
+        let randNumber = Math.floor(Math.random() * 60);
+        fetch(`http://localhost:3000/decks/${deck_id}`)
+        .then(response => response.json())
+        .then(deck => {
+            let cardContainer = document.createElement("img"); 
+            cardContainer.setAttribute("health", deck.cards[randNumber].hp);
+            let cardImage = deck.cards[randNumber].imageUrl;
+            let cardId = deck.cards[randNumber].id;
+            cardContainer.id = cardId;
+            cardContainer.src = cardImage;
+            hand2.appendChild(cardContainer);
+            cardContainer.addEventListener("click", playCard);
+        })
+        
+    }else if(hand3.childElementCount == 0){
+        let playByPlay = document.querySelector('.playByPlay');
+        let li = document.createElement('li');
+        li.classList.add("userPlays");
+        li.innerText = "The User draws 1 Card";
+        playByPlay.append(li);
+        let randNumber = Math.floor(Math.random() * 60);
+        fetch(`http://localhost:3000/decks/${deck_id}`)
+        .then(response => response.json())
+        .then(deck => {
+            let cardContainer = document.createElement("img"); 
+            cardContainer.setAttribute("health", deck.cards[randNumber].hp);
+            let cardImage = deck.cards[randNumber].imageUrl;
+            let cardId = deck.cards[randNumber].id;
+            cardContainer.id = cardId;
+            cardContainer.src = cardImage;
+            hand3.appendChild(cardContainer);
+            cardContainer.addEventListener("click", playCard);
+        })
+        
+    }else if(hand4.childElementCount == 0){
+        let playByPlay = document.querySelector('.playByPlay');
+        let li = document.createElement('li');
+        li.classList.add("userPlays");
+        li.innerText = "The User draws 1 Card";
+        playByPlay.append(li);
+        let randNumber = Math.floor(Math.random() * 60);
+        fetch(`http://localhost:3000/decks/${deck_id}`)
+        .then(response => response.json())
+        .then(deck => {
+            let cardContainer = document.createElement("img"); 
+            cardContainer.setAttribute("health", deck.cards[randNumber].hp);
+            let cardImage = deck.cards[randNumber].imageUrl;
+            let cardId = deck.cards[randNumber].id;
+            cardContainer.id = cardId;
+            cardContainer.src = cardImage;
+            hand4.appendChild(cardContainer);
+            cardContainer.addEventListener("click", playCard);
+        })
+        
+    }else if(hand5.childElementCount == 0){
+        let playByPlay = document.querySelector('.playByPlay');
+        let li = document.createElement('li');
+        li.classList.add("userPlays");
+        li.innerText = "The User draws 1 Card";
+        playByPlay.append(li);
+        let randNumber = Math.floor(Math.random() * 60);
+        fetch(`http://localhost:3000/decks/${deck_id}`)
+        .then(response => response.json())
+        .then(deck => {
+            let cardContainer = document.createElement("img"); 
+            cardContainer.setAttribute("health", deck.cards[randNumber].hp);
+            let cardImage = deck.cards[randNumber].imageUrl;
+            let cardId = deck.cards[randNumber].id;
+            cardContainer.id = cardId;
+            cardContainer.src = cardImage;
+            hand5.appendChild(cardContainer);
+            cardContainer.addEventListener("click", playCard);
+        })
+        
+        
+    }else if(hand6.childElementCount == 0){
+        let playByPlay = document.querySelector('.playByPlay');
+        let li = document.createElement('li');
+        li.classList.add("userPlays");
+        li.innerText = "The User draws 1 Card";
+        playByPlay.append(li);
+        let randNumber = Math.floor(Math.random() * 60);
+        fetch(`http://localhost:3000/decks/${deck_id}`)
+        .then(response => response.json())
+        .then(deck => {
+            let cardContainer = document.createElement("img"); 
+            cardContainer.setAttribute("health", deck.cards[randNumber].hp);
+            let cardImage = deck.cards[randNumber].imageUrl;
+            let cardId = deck.cards[randNumber].id;
+            cardContainer.id = cardId;
+            cardContainer.src = cardImage;
+            hand6.appendChild(cardContainer);
+            cardContainer.addEventListener("click", playCard);
+        })
+        
     }
 }
 
