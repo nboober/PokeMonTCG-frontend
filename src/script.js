@@ -128,6 +128,10 @@ function fetchDeck() {
 
 function playGame(deck){
     body.innerHTML = "";
+
+    let lzrSnd = new Audio("Pokemon-Theme-Song.mp3");
+    lzrSnd.play()
+
     currentGym = event.target.classList[1];
     setGym()
     change(currentGym)
