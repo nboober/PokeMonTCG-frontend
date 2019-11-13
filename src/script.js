@@ -230,6 +230,7 @@ function drawCards(deck){
 
     let hand1 = document.querySelector(".div8");
     let cardContainer1 = document.createElement("img"); 
+    cardContainer1.setAttribute("health", deck.cards[randNumber1].hp);
     let cardImage1 = deck.cards[randNumber1].imageUrl;
     let cardId1 = deck.cards[randNumber1].id;
     cardContainer1.id = cardId1;
@@ -241,6 +242,7 @@ function drawCards(deck){
 
     let hand2 = document.querySelector(".div9");
     let cardContainer2 = document.createElement("img"); 
+    cardContainer2.setAttribute("health", deck.cards[randNumber2].hp);
     let cardImage2 = deck.cards[randNumber2].imageUrl;
     let cardId2 = deck.cards[randNumber2].id;
     cardContainer2.id = cardId2;
@@ -252,6 +254,7 @@ function drawCards(deck){
 
     let hand3 = document.querySelector(".div10");
     let cardContainer3 = document.createElement("img"); 
+    cardContainer3.setAttribute("health", deck.cards[randNumber3].hp);
     let cardImage3 = deck.cards[randNumber3].imageUrl;
     let cardId3 = deck.cards[randNumber3].id;
     cardContainer3.id = cardId3;
@@ -263,6 +266,7 @@ function drawCards(deck){
 
     let hand4 = document.querySelector(".div11");
     let cardContainer4 = document.createElement("img"); 
+    cardContainer4.setAttribute("health", deck.cards[randNumber4].hp);
     let cardImage4 = deck.cards[randNumber4].imageUrl;
     let cardId4 = deck.cards[randNumber4].id;
     cardContainer4.id = cardId4;
@@ -274,6 +278,7 @@ function drawCards(deck){
 
     let hand5 = document.querySelector(".div12");
     let cardContainer5 = document.createElement("img"); 
+    cardContainer5.setAttribute("health", deck.cards[randNumber5].hp);
     let cardImage5 = deck.cards[randNumber5].imageUrl;
     let cardId5 = deck.cards[randNumber5].id;
     cardContainer5.id = cardId5;
@@ -285,6 +290,7 @@ function drawCards(deck){
 
     let hand6 = document.querySelector(".div13");
     let cardContainer6 = document.createElement("img"); 
+    cardContainer6.setAttribute("health", deck.cards[randNumber6].hp);
     let cardImage6 = deck.cards[randNumber6].imageUrl;
     let cardId6 = deck.cards[randNumber6].id;
     cardContainer6.id = cardId6;
@@ -297,21 +303,22 @@ function drawCards(deck){
 
 function playCard(){
     let parent = event.target.parentElement;
+    let health = event.target.getAttribute("health");
     event.target.remove();
     let id = event.target.id;
 
     let oppCardContainer = document.querySelector(".div5");
     if(oppCardContainer.childElementCount){
         let swappedPokemonId = oppCardContainer.firstElementChild.id;
+        let health = oppCardContainer.firstElementChild.getAttribute("health");
         
-        swapPokemon(parent, swappedPokemonId);
+        swapPokemon(parent, swappedPokemonId, health);
     }
     
     fetch(`http://localhost:3000/cards/${id}`)
     .then(response => response.json())
     .then(card => {
         console.log(card);
-
         let playByPlay = document.querySelector('.playByPlay');
         let li = document.createElement('li');
         li.classList.add("userPlays")
@@ -322,25 +329,26 @@ function playCard(){
         userPlayCardContainer.setAttribute('hp', card.hp)
         userPlayCardContainer.innerHTML = "";
         let userPlayCard = document.createElement("img"); 
+        userPlayCard.setAttribute("health", health);
         let cardImage1 = card.imageUrl;
         let cardId1 = card.id;
         userPlayCard.id = cardId1;
         userPlayCard.src = cardImage1;
         userPlayCardContainer.appendChild(userPlayCard);
         
+        //if(health !< card.hp)
         let userCardHealth = document.querySelector('.div6');
         userCardHealth.innerHTML = "";
         let userCardAttack = document.querySelector('.div7');
 
         let healthDiv = document.createElement('div');
-        myHPBar(healthDiv, card)
+        myHPBar(healthDiv, card, health)
         let hp = document.createElement('span');
-        hp.innerText = `${card.hp}/${card.hp}`
+        hp.innerText = `${health}/${card.hp}`
         healthDiv.appendChild(hp)
 
-
-        
         userCardHealth.appendChild(healthDiv);
+
         userCardAttack.innerText = `${card.attack_name} - ${card.attack_damage} damage`;
         userCardAttack.innerHTML = "";
         let attack1 = document.createElement('p');
@@ -413,7 +421,7 @@ function playEnemyCard(deck){
     }
 }
 
-function swapPokemon(parent,id){
+function swapPokemon(parent,id, health){
     
     console.log("Pokemon swapped");
     fetch(`http://localhost:3000/cards/${id}`)
@@ -424,6 +432,7 @@ function swapPokemon(parent,id){
         let cardId = card.id;
         cardContainer.id = cardId;
         cardContainer.src = cardImage;
+        cardContainer.setAttribute("health", health);
         parent.appendChild(cardContainer);
         
         let playByPlay = document.querySelector('.playByPlay');
@@ -513,6 +522,10 @@ function oppAttackUser(){
     }
 
     updateUserHP(userCardHealth, userCardHealthValue, oppCardAttack)
+    let health = parseInt(userCard.firstChild.getAttribute("health"));
+    let newHealth = health - oppCardAttack;
+    userCard.firstChild.setAttribute("health", newHealth);
+
     let current_health = Number(userCardHealth.innerText.split("/")[0])
 
     let playByPlay = document.querySelector('.playByPlay');
@@ -559,11 +572,12 @@ function lose(){
     document.location.reload()
 }
 
-function myHPBar(healthBox) {
+function myHPBar(healthBox,card,health) {
     const progressBarContainer = document.createElement('div')
     progressBarContainer.classList.add('progress')
     const hpBar = document.createElement('div');
-    hpBar.style.width = "100%"
+    let healthBar = (health / card.hp)*100;
+    hpBar.style.width = `${healthBar}%`;
     hpBar.classList.add('progress-bar');
     hpBar.classList.add('progress-bar-striped');
 
