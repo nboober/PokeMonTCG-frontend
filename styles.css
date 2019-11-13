@@ -233,7 +233,7 @@ form {
   }
 
   .red-outline{
-    border: 3px solid red;
+    border: 6px solid red;
   }
 
     .div1 { grid-area: 2 / 1 / 6 / 3; }
@@ -249,4 +249,5 @@ form {
     .div11 { grid-area: 7 / 5 / 10 / 6; }
     .div12 { grid-area: 7 / 6 / 10 / 7; }
     .div13 { grid-area: 7 / 7 / 10 / 8; }
+    .div14 { grid-area: 4 / 7 / 7 / 8; }
 
