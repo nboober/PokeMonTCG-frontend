@@ -196,6 +196,15 @@ function playGame(deck){
     let userHand6 = document.createElement('div');
     userHand6.classList.add("div13");
 
+    let drawDiv = document.createElement('div');
+    drawDiv.classList.add("div14");
+    let image = document.createElement("img");
+    image.src = "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Pokemon_Trading_Card_Game_cardback.jpg/220px-Pokemon_Trading_Card_Game_cardback.jpg";
+    drawDiv.appendChild(image);
+    image.addEventListener("click", function(){
+        drawNewCard(deck);
+    })
+
     const badgeDiv = document.createElement('div');
     badgeDiv.id = 'badge-div'
     const badgePic = document.createElement('img');
@@ -203,7 +212,7 @@ function playGame(deck){
     badgeDiv.appendChild(badgePic);
     body.appendChild(badgeDiv)
 
-    container.append(gameInfo,oppCard,oppHealth,oppAttack,userCard,userHealth,userAttack,userHand1,userHand2,userHand3,userHand4,userHand5,userHand6);
+    container.append(gameInfo,oppCard,oppHealth,oppAttack,userCard,userHealth,userAttack,userHand1,userHand2,userHand3,userHand4,userHand5,userHand6,drawDiv);
     
     body.appendChild(container);
     
@@ -536,7 +545,7 @@ function oppAttackUser(card){
     li.innerText = `The Opponent's ${pokemonName} attacked the user with ${attackname} for ${oppCardAttack} damage!`;
     playByPlay.append(li);   
 
-    drawNewCard(card);
+    // drawNewCard(card);
 
     if( current_health <= 0){
 
@@ -565,9 +574,7 @@ function oppAttackUser(card){
     }
 }
 
-function drawNewCard(card){
-
-    let deck_id = card.deck_id;
+function drawNewCard(deck){
 
     let hand1 = document.querySelector(".div8");
     let hand2 = document.querySelector(".div9");
@@ -583,9 +590,7 @@ function drawNewCard(card){
         li.innerText = "The User draws 1 Card";
         playByPlay.append(li);
         let randNumber = Math.floor(Math.random() * 60);
-        fetch(`http://localhost:3000/decks/${deck_id}`)
-        .then(response => response.json())
-        .then(deck => {
+       
             let cardContainer = document.createElement("img"); 
             cardContainer.setAttribute("health", deck.cards[randNumber].hp);
             let cardImage = deck.cards[randNumber].imageUrl;
@@ -594,7 +599,6 @@ function drawNewCard(card){
             cardContainer.src = cardImage;
             hand1.appendChild(cardContainer);
             cardContainer.addEventListener("click", playCard);
-        })
         
     }else if(hand2.childElementCount == 0){
         let playByPlay = document.querySelector('.playByPlay');
@@ -603,10 +607,8 @@ function drawNewCard(card){
         li.innerText = "The User draws 1 Card";
         playByPlay.append(li);
         let randNumber = Math.floor(Math.random() * 60);
-        fetch(`http://localhost:3000/decks/${deck_id}`)
-        .then(response => response.json())
-        .then(deck => {
-            let cardContainer = document.createElement("img"); 
+
+        let cardContainer = document.createElement("img"); 
             cardContainer.setAttribute("health", deck.cards[randNumber].hp);
             let cardImage = deck.cards[randNumber].imageUrl;
             let cardId = deck.cards[randNumber].id;
@@ -614,7 +616,6 @@ function drawNewCard(card){
             cardContainer.src = cardImage;
             hand2.appendChild(cardContainer);
             cardContainer.addEventListener("click", playCard);
-        })
         
     }else if(hand3.childElementCount == 0){
         let playByPlay = document.querySelector('.playByPlay');
@@ -623,10 +624,8 @@ function drawNewCard(card){
         li.innerText = "The User draws 1 Card";
         playByPlay.append(li);
         let randNumber = Math.floor(Math.random() * 60);
-        fetch(`http://localhost:3000/decks/${deck_id}`)
-        .then(response => response.json())
-        .then(deck => {
-            let cardContainer = document.createElement("img"); 
+
+        let cardContainer = document.createElement("img"); 
             cardContainer.setAttribute("health", deck.cards[randNumber].hp);
             let cardImage = deck.cards[randNumber].imageUrl;
             let cardId = deck.cards[randNumber].id;
@@ -634,7 +633,6 @@ function drawNewCard(card){
             cardContainer.src = cardImage;
             hand3.appendChild(cardContainer);
             cardContainer.addEventListener("click", playCard);
-        })
         
     }else if(hand4.childElementCount == 0){
         let playByPlay = document.querySelector('.playByPlay');
@@ -643,10 +641,8 @@ function drawNewCard(card){
         li.innerText = "The User draws 1 Card";
         playByPlay.append(li);
         let randNumber = Math.floor(Math.random() * 60);
-        fetch(`http://localhost:3000/decks/${deck_id}`)
-        .then(response => response.json())
-        .then(deck => {
-            let cardContainer = document.createElement("img"); 
+
+        let cardContainer = document.createElement("img"); 
             cardContainer.setAttribute("health", deck.cards[randNumber].hp);
             let cardImage = deck.cards[randNumber].imageUrl;
             let cardId = deck.cards[randNumber].id;
@@ -654,7 +650,6 @@ function drawNewCard(card){
             cardContainer.src = cardImage;
             hand4.appendChild(cardContainer);
             cardContainer.addEventListener("click", playCard);
-        })
         
     }else if(hand5.childElementCount == 0){
         let playByPlay = document.querySelector('.playByPlay');
@@ -663,10 +658,8 @@ function drawNewCard(card){
         li.innerText = "The User draws 1 Card";
         playByPlay.append(li);
         let randNumber = Math.floor(Math.random() * 60);
-        fetch(`http://localhost:3000/decks/${deck_id}`)
-        .then(response => response.json())
-        .then(deck => {
-            let cardContainer = document.createElement("img"); 
+
+        let cardContainer = document.createElement("img"); 
             cardContainer.setAttribute("health", deck.cards[randNumber].hp);
             let cardImage = deck.cards[randNumber].imageUrl;
             let cardId = deck.cards[randNumber].id;
@@ -674,8 +667,6 @@ function drawNewCard(card){
             cardContainer.src = cardImage;
             hand5.appendChild(cardContainer);
             cardContainer.addEventListener("click", playCard);
-        })
-        
         
     }else if(hand6.childElementCount == 0){
         let playByPlay = document.querySelector('.playByPlay');
@@ -684,10 +675,8 @@ function drawNewCard(card){
         li.innerText = "The User draws 1 Card";
         playByPlay.append(li);
         let randNumber = Math.floor(Math.random() * 60);
-        fetch(`http://localhost:3000/decks/${deck_id}`)
-        .then(response => response.json())
-        .then(deck => {
-            let cardContainer = document.createElement("img"); 
+
+        let cardContainer = document.createElement("img"); 
             cardContainer.setAttribute("health", deck.cards[randNumber].hp);
             let cardImage = deck.cards[randNumber].imageUrl;
             let cardId = deck.cards[randNumber].id;
@@ -695,8 +684,9 @@ function drawNewCard(card){
             cardContainer.src = cardImage;
             hand6.appendChild(cardContainer);
             cardContainer.addEventListener("click", playCard);
-        })
         
+    }else{
+        alert("You can only have six pokemon in your hand")
     }
 }
 
