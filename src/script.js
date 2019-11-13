@@ -61,6 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
 var oppRemainingPokemon = 6;
 var userRemainingPokemon = 6;
 
+function updateUser(user) {
+    fetch(`http://localhost:3000/users/${user.id}`)
+    .then(response => response.json())
+    .then(user => userShowPage(user))
+
+}
+
 function userShowPage(user) {
     body.removeAttribute('style')
     sidebar.removeAttribute('hidden')
@@ -367,7 +374,7 @@ function playCard(){
         attack2.id = card.attack_damage_2;
         
         attack1.innerText = `${card.attack_name} - ${card.attack_damage} damage`;
-        if(card.attack_name_2 != null){
+        if(card.attack_name_2 != "No Attack"){
             attack2.innerText = `${card.attack_name_2} - ${card.attack_damage_2} damage`;
             userCardAttack.append(attack1,attack2);
         }else{
@@ -842,7 +849,8 @@ function displayCard() {
 }
 
 function renderForm() {
-    body.innerHTML = ""
+    //body.innerText = ""
+    cards.innerText = ""
     const createForm = document.createElement('form');
     const type1 = document.createElement('select');
     type1.id = "first-type"
@@ -926,7 +934,7 @@ function renderForm() {
     createForm.appendChild(type2)
     createForm.appendChild(nameDeck)
     createForm.appendChild(createSubmit)
-    body.appendChild(createForm)
+    cards.appendChild(createForm)
     createForm.addEventListener('submit', createDeck)
 }
 
@@ -948,24 +956,9 @@ function createDeck() {
 
     fetch("http://localhost:3000/decks", configObj)
     .then(response => response.json())
-   .then(response => console.log(response))
+   .then(response => {
+       decks.innerHTML = ""
+       updateUser(currentUser)
+        console.log(response)})
 }
 
-function postDeckToUser() {
-    event.preventDefault()
-    const firstType = document.getElementById('first-type').value
-    const secondType = document.getElementById('second-type').value
-    
-    const configObj = {
-        method: "POST",
-        header: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify({})
-    }
-
-    fetch(`https://api.pokemontcg.io/v1/cards?types=${firstType}|${secondType}`)
-    .then(response => response.json())
-    .then(response => console.log(response))
-}
