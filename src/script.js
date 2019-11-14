@@ -976,6 +976,7 @@ function createDeck() {
 }
 
 function myWonBadges() {
+    myBadges.innerHTML = ""
     const waterBadgePic = document.createElement('img');
     waterBadgePic.src = waterBadge;
     myBadges.appendChild(waterBadgePic)
