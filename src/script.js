@@ -312,7 +312,11 @@ function drawCards(deck){
     hand6.appendChild(cardContainer6);
     cardContainer6.addEventListener("click", playCard);
 
-    playEnemyCard(deck);
+    if(!gymDeckId){
+        playEnemyCard(deck);
+    }else{
+        fetchGymDeck();
+    }
 }
 
 function playCard(){
@@ -504,7 +508,11 @@ function attackOpp(card){
         fetch(`http://localhost:3000/decks/${id}`)
         .then(response => response.json())
         .then(deck => {
-            playEnemyCard(deck);
+            if(!gymDeckId){
+                playEnemyCard(deck)
+            }else{
+                fetchGymDeck()
+            }
         })
 
     }else{
@@ -1012,4 +1020,12 @@ function myWonBadges() {
     genericBadgePic.src =genericBadge;
     myBadges.appendChild(genericBadgePic)
     genericBadgePic.classList.add('won-badge')
+}
+
+function fetchGymDeck() {
+    fetch(`http://localhost:3000/decks/${gymDeckId}`)
+    .then(response => response.json())
+    .then(deck => {
+        playEnemyCard(deck);
+    })
 }
