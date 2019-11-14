@@ -34,7 +34,15 @@ audio{
   /* position: absolute; */
 }
 
-#greeting{
+.won-badge{
+  height: 80px;
+  width: auto;
+}
+
+#badge-banner {
+  float: right;
+  color: white;
+  /* margin-bottom: 1000px; */
 }
 
 #login-logo-div {

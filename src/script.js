@@ -12,6 +12,7 @@ const genericBadge = 'https://img.rankedboost.com/wp-content/uploads/2016/07/Pok
 //Gym Backgrounds
 let currentGym;
 let currentBadge;
+let gymDeckId;
 const generic = 'https://images7.alphacoders.com/592/thumb-1920-592678.jpg'
 const rock = 'https://cdn.bulbagarden.net/upload/3/3b/Cyllage_Gym_anime.png'
 const fire = 'https://i2.wp.com/www.puclpodcast.com/wp-content/uploads/2017/08/pokemon-59-07.png?ssl=1'
@@ -26,6 +27,8 @@ const earth = 'https://cdn.bulbagarden.net/upload/7/7b/Driftveil_Gym_anime.png'
 //Page elements
 let currentUser;
 const htmlDoc = document.getElementsByTagName('html')[0]
+const banner = document.getElementById('banner')
+const myBadges = document.getElementById('my-badges')
 const loginDiv = document.getElementById('login-logo-div')
 const loginForm = document.getElementById('login-form')
 const header = document.getElementById('greeting')
@@ -40,23 +43,8 @@ const main = document.getElementById('main');
 const modalBody = document.getElementsByClassName('modal-body')[0];
 const createDeckBtn = document.getElementById('create-button')
 
-document.addEventListener('DOMContentLoaded', () => {
-    
+document.addEventListener('DOMContentLoaded', () => {  
     loginForm.addEventListener('submit', login)
-
-//     fetch("http://localhost:3000/users")
-//     .then(response => response.json())
-//     .then(user => {
-        
-//         userShowPage(user[0])
-//     })
-
-//     gyms.forEach(gym => {
-//     gym.addEventListener('click', () => {
-//         renderGymBoard()
-//     })
-// })
-// audio.src = URL.createObjectURL(document.getElementsByTagName('input')[0].files[0]);
 })
 var oppRemainingPokemon = 6;
 var userRemainingPokemon = 6;
@@ -79,7 +67,8 @@ function userShowPage(user) {
     body.style.display = "inline";
     loginDiv.classList.add("login")
     main.removeAttribute('hidden')
-    header.innerText = `Welcome! ${user.name}`
+    myWonBadges()
+    header.innerText = `Welcome ${user.name}!`
     createDeckBtn.addEventListener('click', renderForm)
     user.decks.forEach(deck => {
         const user_deck = document.createElement('li');
@@ -813,34 +802,42 @@ function setGym() {
         case 'rock':
             currentGym = rock;
             currentBadge = rockBadge;
+            gymDeckId = 125;
             break;
         case 'fire':
             currentGym = fire;
             currentBadge = fireBadge;
+            gymDeckId = 118;
             break;
         case 'water':
             currentGym = water;
             currentBadge = waterBadge;
+            gymDeckId = 119;
             break;
         case 'electric':
             currentGym = thunder;
             currentBadge = thunderBadge;
+            gymDeckId = 123;
             break;
         case 'grass':
             currentGym = grass;
             currentBadge = grassBadge;
+            gymDeckId = 121;
             break;
         case 'poison':
             currentGym = poison;
             currentBadge = poisonBadge;
+            gymDeckId = 126;
             break;
         case 'psychic':
             currentGym = psychic;
             currentBadge = psychicBadge;
+            gymDeckId = 124;
             break;
         case 'ground':
             currentGym = earth;
             currentBadge = earthBadge;
+            gymDeckId = 127;
             break;
         default:
             currentGym = generic;
@@ -970,3 +967,49 @@ function createDeck() {
         console.log(response)})
 }
 
+function myWonBadges() {
+    const waterBadgePic = document.createElement('img');
+    waterBadgePic.src = waterBadge;
+    myBadges.appendChild(waterBadgePic)
+    waterBadgePic.classList.add('won-badge')
+
+    const rockBadgePic = document.createElement('img');
+    rockBadgePic.src = rockBadge;
+    myBadges.appendChild(rockBadgePic)
+    rockBadgePic.classList.add('won-badge')
+
+    const fireBadgePic = document.createElement('img');
+    fireBadgePic.src = fireBadge;
+    myBadges.appendChild(fireBadgePic)
+    fireBadgePic.classList.add('won-badge')
+
+    const thunderBadgePic = document.createElement('img');
+    thunderBadgePic.src = thunderBadge;
+    myBadges.appendChild(thunderBadgePic)
+    thunderBadgePic.classList.add('won-badge')
+
+    const grassBadgePic = document.createElement('img');
+    grassBadgePic.src = grassBadge;
+    myBadges.appendChild(grassBadgePic)
+    grassBadgePic.classList.add('won-badge')
+
+    const psychicBadgePic = document.createElement('img');
+    psychicBadgePic.src = psychicBadge;
+    myBadges.appendChild(psychicBadgePic)
+    psychicBadgePic.classList.add('won-badge')
+
+    const poisonBadgePic = document.createElement('img');
+    poisonBadgePic.src = poisonBadge;
+    myBadges.appendChild(poisonBadgePic)
+    poisonBadgePic.classList.add('won-badge')
+
+    const earthBadgePic = document.createElement('img');
+    earthBadgePic.src =earthBadge;
+    myBadges.appendChild(earthBadgePic)
+    earthBadgePic.classList.add('won-badge')
+
+    const genericBadgePic = document.createElement('img');
+    genericBadgePic.src =genericBadge;
+    myBadges.appendChild(genericBadgePic)
+    genericBadgePic.classList.add('won-badge')
+}
