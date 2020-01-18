@@ -835,12 +835,12 @@ function setGym() {
         case 'poison':
             currentGym = poison;
             currentBadge = poisonBadge;
-            gymDeckId = 8;
+            gymDeckId = 10;
             break;
         case 'psychic':
             currentGym = psychic;
             currentBadge = psychicBadge;
-            gymDeckId = 10;
+            gymDeckId = 6;
             break;
         case 'ground':
             currentGym = earth;
