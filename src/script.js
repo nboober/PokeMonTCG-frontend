@@ -810,42 +810,42 @@ function setGym() {
         case 'rock':
             currentGym = rock;
             currentBadge = rockBadge;
-            gymDeckId = 125;
+            gymDeckId = 7;
             break;
         case 'fire':
             currentGym = fire;
             currentBadge = fireBadge;
-            gymDeckId = 118;
+            gymDeckId = 2;
             break;
         case 'water':
             currentGym = water;
             currentBadge = waterBadge;
-            gymDeckId = 119;
+            gymDeckId = 3;
             break;
         case 'electric':
             currentGym = thunder;
             currentBadge = thunderBadge;
-            gymDeckId = 123;
+            gymDeckId = 5;
             break;
         case 'grass':
             currentGym = grass;
             currentBadge = grassBadge;
-            gymDeckId = 121;
+            gymDeckId = 4;
             break;
         case 'poison':
             currentGym = poison;
             currentBadge = poisonBadge;
-            gymDeckId = 126;
+            gymDeckId = 8;
             break;
         case 'psychic':
             currentGym = psychic;
             currentBadge = psychicBadge;
-            gymDeckId = 124;
+            gymDeckId = 6;
             break;
         case 'ground':
             currentGym = earth;
             currentBadge = earthBadge;
-            gymDeckId = 127;
+            gymDeckId = 1;
             break;
         default:
             currentGym = generic;
