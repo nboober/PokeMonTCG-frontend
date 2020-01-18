@@ -50,7 +50,7 @@ var oppRemainingPokemon = 6;
 var userRemainingPokemon = 6;
 
 function updateUser(user, deck) {
-    fetch(`http://localhost:3000/users/${user.id}`)
+    fetch(`https://tcg-back.herokuapp.com/users/${user.id}`)
     .then(response => response.json())
     .then(user => {
         userShowPage(user)
@@ -116,7 +116,7 @@ function renderCards (card) {
 
 function fetchDeck() {
     const deck_id = event.target.id.split("-")[1]
-    return fetch(`http://localhost:3000/decks/${deck_id}`)
+    return fetch(`https://tcg-back.herokuapp.com/decks/${deck_id}`)
 }
 
 function playGame(deck){
@@ -333,7 +333,7 @@ function playCard(){
         swapPokemon(parent, swappedPokemonId, health);
     }
     
-    fetch(`http://localhost:3000/cards/${id}`)
+    fetch(`https://tcg-back.herokuapp.com/cards/${id}`)
     .then(response => response.json())
     .then(card => {
         console.log(card);
@@ -441,7 +441,7 @@ function playEnemyCard(deck){
 function swapPokemon(parent, id, health){
     
     console.log("Pokemon swapped");
-    fetch(`http://localhost:3000/cards/${id}`)
+    fetch(`https://tcg-back.herokuapp.com/cards/${id}`)
     .then(response => response.json())
     .then(card => {
         let cardContainer = document.createElement("img"); 
@@ -505,7 +505,7 @@ function attackOpp(card){
             win();
         }
 
-        fetch(`http://localhost:3000/decks/${id}`)
+        fetch(`https://tcg-back.herokuapp.com/decks/${id}`)
         .then(response => response.json())
         .then(deck => {
             if(!gymDeckId){
@@ -772,7 +772,7 @@ function login() {
     console.log("helo")
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
-    fetch('http://localhost:3000/users')
+    fetch('https://tcg-back.herokuapp.com/users')
     .then(response => response.json())
     .then(users => checkUsers(users, username, password))
 }
@@ -967,7 +967,7 @@ function createDeck() {
     }
     
 
-    fetch("http://localhost:3000/decks", configObj)
+    fetch("https://tcg-back.herokuapp.com/decks", configObj)
     .then(response => response.json())
    .then(response => {
        decks.innerHTML = ""
@@ -1024,7 +1024,7 @@ function myWonBadges() {
 }
 
 function fetchGymDeck() {
-    fetch(`http://localhost:3000/decks/${gymDeckId}`)
+    fetch(`https://tcg-back.herokuapp.com/decks/${gymDeckId}`)
     .then(response => response.json())
     .then(deck => {
         playEnemyCard(deck);
