@@ -840,7 +840,7 @@ function setGym() {
         case 'psychic':
             currentGym = psychic;
             currentBadge = psychicBadge;
-            gymDeckId = 6;
+            gymDeckId = 10;
             break;
         case 'ground':
             currentGym = earth;
