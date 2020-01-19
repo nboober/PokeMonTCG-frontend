@@ -63,8 +63,9 @@ function updateUser(user, deck) {
 function welcomeAlert(){
     swal({
         title: "How to Log In",
-        text: "Login with the following credentials => password: poke, username: nboober",
+        text: "Login with the following credentials: \n password: poke, username: nboober",
         button: "Got It!",
+        icon: "info"
       });
 }
 
