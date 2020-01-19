@@ -708,17 +708,35 @@ function drawNewCard(deck){
             cardContainer.addEventListener("click", playCard);
         
     }else{
-        alert("You can only have six pokemon in your hand")
+        // alert("You can only have six pokemon in your hand")
+        swal({
+            title: "Card Limit",
+            text: "You can only have six pokemon in your hand",
+            button: "Got It!",
+            icon: "info"
+          });
     }
 }
 
 function win(){
-    confirm("You Won!!!")
+    // confirm("You Won!!!")
+    swal({
+        title: "You Won!!!",
+        text: "You Won! You are being redirected to the login page.",
+        button: "Ok",
+        icon: "success"
+      });
     document.location.reload()
 }
 
 function lose(){
-    confirm("You Lose :(")
+    // confirm("You Lose :(")
+    swal({
+        title: "You Lost",
+        text: "You Lost :( . You are being redirected to the login page.",
+        button: "Ok",
+        icon: "error"
+      });
     document.location.reload()
 }
 
@@ -795,10 +813,23 @@ function checkUsers(users, username, password) {
         }
     })
     if (userFound) {
-        console.log("succesful login")
+        // console.log("succesful login")
+        swal({
+            title: "Login Successful",
+            text: "Logging In",
+            button: "Ok",
+            icon: "success"
+          });
         userShowPage(currentUser)
     } else {
-        alert("User Not Found!")
+        // alert("User Not Found!")
+        swal({
+            title: "Login Failed",
+            text: "User Not Found!",
+            button: "Ok",
+            icon: "error"
+          });
+        
     }
 }
 
