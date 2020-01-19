@@ -23,3 +23,7 @@ Select either a gym leader to play against or training
 ### Back-End
 
 https://github.com/nboober/PokeMonTCG-backend
+
+### API Used
+
+https://pokemontcg.io/
