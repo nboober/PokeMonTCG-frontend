@@ -60,6 +60,14 @@ function updateUser(user, deck) {
 
 }
 
+function welcomeAlert(){
+    swal({
+        title: "How to Log In",
+        text: "Login with the following credentials => password: poke, username: nboober",
+        button: "Got It!",
+      });
+}
+
 function userShowPage(user) {
     body.removeAttribute('style')
     sidebar.removeAttribute('hidden')
