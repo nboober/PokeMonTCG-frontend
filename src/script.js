@@ -719,24 +719,24 @@ function drawNewCard(deck){
 }
 
 function win(){
-    // confirm("You Won!!!")
-    swal({
-        title: "You Won!!!",
-        text: "You Won! You are being redirected to the login page.",
-        icon: "success",
-        button: "Ok"
-      });
+    confirm("You Won!!!")
+    // swal({
+    //     title: "You Won!!!",
+    //     text: "You Won! You are being redirected to the login page.",
+    //     icon: "success",
+    //     button: "Ok"
+    //   });
     document.location.reload()
 }
 
 function lose(){
-    // confirm("You Lose :(")
-    swal({
-        title: "You Lost",
-        text: "You Lost :( . You are being redirected to the login page.",
-        icon: "error",
-        button: "Ok"
-      });
+    confirm("You Lose :(")
+    // swal({
+    //     title: "You Lost",
+    //     text: "You Lost :( . You are being redirected to the login page.",
+    //     icon: "error",
+    //     button: "Ok"
+    //   });
     document.location.reload()
 }
 
