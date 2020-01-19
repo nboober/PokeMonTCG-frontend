@@ -719,29 +719,33 @@ function drawNewCard(deck){
 }
 
 function win(){
-    confirm("You Won!!!")
-    // swal({
-    //     title: "You Won!!!",
-    //     text: "You Won! You are being redirected to the login page.",
-    //     icon: "success",
-    //     button: "Ok"
-    //   });
-    document.location.reload()
+    // confirm("You Won!!!")
+    swal({
+        title: "You Won!!!",
+        text: "You Won! You are being redirected to the login page.",
+        icon: "success",
+        button: "Ok"
+      });
+    setTimeout(()=>{
+        document.location.reload()
+    }, 3000)
 }
 
 function lose(){
-    confirm("You Lose :(")
-    // swal({
-    //     title: "You Lost",
-    //     text: "You Lost :( . You are being redirected to the login page.",
-    //     icon: "error",
-    //     button: "Ok"
-    //   });
-    document.location.reload()
-}
-
-function myHPBar(healthBox,card,health) {
-    const progressBarContainer = document.createElement('div')
+    // confirm("You Lose :(")
+    swal({
+            title: "You Lost",
+            text: "You Lost :( . You are being redirected to the login page.",
+            icon: "error",
+            button: "Ok"
+          });
+        setTimeout(()=>{
+            document.location.reload()
+        }, 3000)
+    }
+    
+    function myHPBar(healthBox,card,health) {
+        const progressBarContainer = document.createElement('div')
     progressBarContainer.classList.add('progress')
     const hpBar = document.createElement('div');
     let healthBar = (health / card.hp)*100;
