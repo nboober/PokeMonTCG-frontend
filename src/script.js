@@ -64,8 +64,8 @@ function welcomeAlert(){
     swal({
         title: "How to Log In",
         text: "Login with the following credentials: \n password: poke, username: nboober",
-        button: "Got It!",
-        icon: "info"
+        icon: "info",
+        button: "Got It!"
       });
 }
 
@@ -712,8 +712,8 @@ function drawNewCard(deck){
         swal({
             title: "Card Limit",
             text: "You can only have six pokemon in your hand",
-            button: "Got It!",
-            icon: "info"
+            icon: "info",
+            button: "Got It!"
           });
     }
 }
@@ -723,8 +723,8 @@ function win(){
     swal({
         title: "You Won!!!",
         text: "You Won! You are being redirected to the login page.",
-        button: "Ok",
-        icon: "success"
+        icon: "success",
+        button: "Ok"
       });
     document.location.reload()
 }
@@ -734,8 +734,8 @@ function lose(){
     swal({
         title: "You Lost",
         text: "You Lost :( . You are being redirected to the login page.",
-        button: "Ok",
-        icon: "error"
+        icon: "error",
+        button: "Ok"
       });
     document.location.reload()
 }
@@ -826,8 +826,8 @@ function checkUsers(users, username, password) {
         swal({
             title: "Login Failed",
             text: "User Not Found!",
-            button: "Ok",
-            icon: "error"
+            icon: "error",
+            button: "Ok"
           });
         
     }
