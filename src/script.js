@@ -69,6 +69,15 @@ function welcomeAlert(){
       });
 }
 
+function patient(){
+    swal({
+        title: "Logging In",
+        text: "Please Be Patient. Logging in may take a few seconds",
+        icon: "info",
+        button: "Got It!"
+      });
+}
+
 function userShowPage(user) {
     body.removeAttribute('style')
     sidebar.removeAttribute('hidden')
