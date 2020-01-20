@@ -1,6 +1,12 @@
 # PokeMonTCG-frontend
 
-### How to play
+## Introduction
+This is my Pokemon TCG project front-end. Built with JavaScript
+
+## FrameWorks Used:
+- Sweet Alerts
+
+## How to play
 
 Choose from any of the following users to log in.
 
@@ -20,10 +26,10 @@ Select your deck to play with.
 
 Select either a gym leader to play against or training
 
-### Back-End
+## Back-End
 
 https://github.com/nboober/PokeMonTCG-backend
 
-### API Used
+## API Used
 
 https://pokemontcg.io/
